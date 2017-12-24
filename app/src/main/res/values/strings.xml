@@ -1,0 +1,140 @@
+<resources>
+    <string name="app_name">SoleBook</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="btn_picture">Picture</string>
+    <string name="expand">展开</string>
+    <string name="collapse">收缩</string>
+    <string name="btn_light">Light</string>
+    <string name="action_settings">Settings</string>
+    <string name="user_name">用户名/手机号</string>
+    <string name="tel">手机号</string>
+    <string name="sms_code">手机验证码</string>
+    <string name="get_sms_code">获取手机验证码</string>
+    <string name="next">继续</string>
+    <string name="email">邮箱</string>
+    <string name="submit">提交</string>
+    <string name="user_password">密码</string>
+    <string name="user_password_agin">再次输入密码</string>
+    <string name="msg_username"></string>
+    <string name="msg_forget_error">找回密码失败</string>
+    <string name="msg_forget_ok">找回密码成功</string>
+    <string name="msg_sendsmscode_ok">已经发送到你的手机，注意查收.</string>
+    <string name="msg_sendsmscode_fail">发送短信失败.</string>
+    <string name="msg_smscode_fail">验证码不正确.</string>
+    <string name="msg_password">密码长度6-12</string>
+    <string name="msg_smscode_input_error">验证码必须6位</string>
+    <string name="msg_password_agin_error">两次密码不一致</string>
+    <string name="msg_tel">手机号格式不正确</string>
+    <string name="msg_email">邮箱格式不正确</string>
+    <string name="login">登录</string>
+    <string name="login_sina">sina</string>
+    <string name="login_qq">qq</string>
+    <string name="register">注册</string>
+    <string name="anonymous">随便看看</string>
+    <string name="forget">忘记密码</string>
+    <string name="msg_loading">loading ....</string>
+    <string name="msg_switch_tel">不想用邮箱?\n换用手机号吧。</string>
+    <string name="msg_switch_email">不想用手机号?\n换用邮箱吧。</string>
+    <string name="search_hint">书名/作者</string>
+    <string name="share_img">share_image</string>
+    <string name="share_img2">share_image2</string>
+    <string name="share_img3">share_image3</string>
+    <string name="title_dir">目录</string>
+    <string name="title_author">作者</string>
+    <string name="title_publisher">出版社</string>
+    <string name="title_pubdate">出版年</string>
+    <string name="title_page">页数</string>
+    <string name="title_price">价格</string>
+    <string name="title_binding">装帧</string>
+    <string name="title_isbn">ISBN</string>
+    <string name="msg_comment_add">添加评论</string>
+    <string name="msg_comment_add_empty">评论不能为空</string>
+    <string name="msg_comment_send_ok">发送评论成功</string>
+    <string name="title_book_info">图书简介</string>
+    <string name="title_reply">回复</string>
+    <string name="title_comment">评论</string>
+    <string name="title_newly_like">TA收藏的书</string>
+    <string name="title_newly_comment">TA点评过的</string>
+    <string name="msg_down_img">是否要下载高清大图到相册?(⊙v⊙)</string>
+    <string name="msg_down_img_ok">保存成功.^_^</string>
+    <string name="msg_down_img_error">保存失败.T_T</string>
+    <string name="msg_network_error">获取数据失败.T_T</string>
+    <string name="msg_backpressed">再按返回键退出</string>
+    <string name="navigation_chose_theme">切换主题</string>
+    <string name="navigation_setting">设置</string>
+    <string name="navigation_feedback">反馈建议</string>
+    <string name="title_me">我</string>
+    <string name="share">分享</string>
+    <string name="app_url">http://sole.leanapp.cn/</string>
+    <string name="msg_login_cancel">登陆被取消</string>
+    <string name="msg_delete_error">删除失败</string>
+    <string name="msg_delete_success">删除成功</string>
+    <string name="title_tags">标签</string>
+    <string name="title_confirm">确认</string>
+    <string name="title_cancel">取消</string>
+    <string name="title_hint">提示</string>
+    <string name="msg_logout">是否退出登录?</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="msg_search_none">没有找到书籍</string>
+</resources>

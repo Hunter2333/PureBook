@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/contentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+        android:id="@+id/fragment_tag_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:frv_dividerHeight="7dp"
+        app:frv_itemViewBothSidesMargin="4dp"
+        app:frv_layoutManager="staggeredGrid"
+        app:frv_layoutManagerOrientation="vertical"
+        app:frv_spanCount="5" />
+
+
+    <include layout="@layout/view_loading" />
+
+    <include layout="@layout/view_error" />
+</LinearLayout>
