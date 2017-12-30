@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
 
-                <com.blanke.solebook.view.CurstumSearchView
+                <com.blanke.purebook_android.view.CurstumSearchView
                     android:id="@+id/search_view"
                     style="@style/MaterialSearchViewStyle"
                     android:layout_width="match_parent"

@@ -12,7 +12,7 @@
         android:paddingBottom="5dp"
         android:paddingTop="5dp">
 
-        <com.blanke.solebook.view.flingswipe.SwipeFlingAdapterView
+        <com.blanke.purebook_android.view.flingswipe.SwipeFlingAdapterView
             android:id="@+id/fragment_random_swipeview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

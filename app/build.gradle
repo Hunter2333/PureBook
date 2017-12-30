@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.blanke.solebook"
+        applicationId "com.blanke.purebook_android"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -107,4 +107,5 @@ dependencies {
     compile 'com.veinhorn.tagview:library:1.0.4'
     compile 'com.wefika:flowlayout:0.4.1'
     compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:multidex:1.0.1'
 }
