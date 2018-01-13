@@ -148,7 +148,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
             mSelectPostion = position;
             BookColumn item = bookColumns.get(position);
             toolbar.setTitle(item.getName());
-            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+            FragmentTransation trans = getSupportFragmentManager().beginTransaction();
             hideAllFragment(trans);
             if (fragments[position] != null) {
                 trans.show(fragments[position]);
@@ -161,7 +161,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         }
     }
 
-    private void hideAllFragment(FragmentTransaction trans) {
+    private void  fhideAllFragment(FragmentTransaction trans) {
         for (Fragment f : fragments) {
             if (f != null) {
                 trans.hide(f);

@@ -30,7 +30,7 @@ import java.util.List;
 
 @EFragment(R.layout.fragment_column)
 public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, List<BookColumn>, ColumnView, ColumnPresenter> implements ColumnView {
-    public static final String ARGS_BOOKCOLUMN = "ColumnFragment_mCurrentBookColumn";
+
     @ViewById(R.id.fragment_column_tablayout)
     TabLayout mTabLayout;
     @ViewById(R.id.fragment_column_viewpager)
