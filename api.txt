@@ -1,0 +1,34 @@
+
+登陆 			GET http://47.100.25.190:8088/v1/login 					请求参数1 id	请求参数 password
+
+用户:
+根据id查询用户	GET  http://47.100.25.190:8088/v1/users/{id}			路径参数1 id
+注册			POST http://47.100.25.190:8088/v1/users					请求参数1 name	请求参数2 key
+用户的所有书评	GET  http://47.100.25.190:8088/v1/users/{id}/reviews	请求参数1 id
+写书评			POST http://47.100.25.190:8088/v1/users/{id}/reviews	路径参数1 id	请求参数2 bookid	请求参数3 review
+
+
+书籍:
+根据id查找书籍	GET http://47.100.25.190:8088/v1/books/{id} 			路径参数1 id
+模糊查找书名	GET http://47.100.25.190:8088/v1/books					请求参数1 namelike	备注:最多10本
+根据tag查找书籍	GET http://47.100.25.190:8088/v1/books					请求参数1 tag		备注:最多10本
+某书的所有书评	GET http://47.100.25.190:8088/v1/books/{id}/reviews		路径参数1 id
+
+标签：
+根据书查找标签	GET http://47.100.25.190:8088/v1/books/{id}/tags		路径参数1 id 备注:最多10本书
+
+
+
+
+热门
+
+新书
+
+TOP250
+
+用户喜欢的书
+
+标签
+
+
+
