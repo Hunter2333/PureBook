@@ -1,26 +1,24 @@
 package com.blanke.purebook_android.core.login;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.avos.avoscloud.AVAnonymousUtils;
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVInstallation;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.LogInCallback;
-import com.avos.avoscloud.SaveCallback;
 import com.blanke.purebook_android.R;
 import com.blanke.purebook_android.app.SoleApplication;
 import com.blanke.purebook_android.base.BaseActivity;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.core.main.MainActivity_;
+import com.blanke.purebook_android.core.register.RegisterActivity;
+import com.blanke.purebook_android.core.register.RegisterActivity_;
 import com.blanke.purebook_android.utils.AnimUtils;
 import com.blanke.purebook_android.utils.ResUtils;
 import com.blanke.purebook_android.utils.SnackUtils;
@@ -34,10 +32,6 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.HashMap;
 
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.tencent.qq.QQ;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
@@ -47,15 +41,12 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 //TODO:
 @EActivity(R.layout.activity_login)
-public class LoginActivity extends BaseActivity
-        implements PlatformActionListener {
+public class LoginActivity extends BaseActivity {
 
     @ViewById(R.id.activity_login_logo)ImageView logo;
-    @ViewById(R.id.activity_login_user_name_text)
-    EditText userNameEditText;
+    @ViewById(R.id.activity_login_user_name_text) EditText userNameEditText;
     @ViewById(R.id.activity_login_user_password_text) EditText userPasswordEditText;
-    @ViewById(R.id.activity_login_login_button)
-    Button loginButton;
+    @ViewById(R.id.activity_login_login_button) Button loginButton;
     @ViewById(R.id.activity_login_register_button) Button registerButton;
 
     private String type;
@@ -64,61 +55,30 @@ public class LoginActivity extends BaseActivity
     @AfterViews
     public void init() {
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorAccent));
-        temp = SystemClock.currentThreadTimeMillis();
         SoleApplication.getApplication(this).init();
-        temp = SystemClock.currentThreadTimeMillis() - temp;
-        loginButton.postDelayed(() -> executeLogin(),
-                temp > lessTime ? 0 : lessTime - temp);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        /*Drawable drawable = mLogoIcon.getDrawable();
-        if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
-        }*/
     }
 
-    private void executeLogin() {
-        if (isLogin()) {
-            jumpMain();//如果已经登录则跳转首页
-        } else {
-            AnimUtils.loginShow(mSinaBt);
-            AnimUtils.loginShow(mQQBt);
-        }
-    }
-
-    private boolean isLogin() {
-        return User.getCurrentUser() != null;
-    }
 
     @Click(R.id.activity_login_login_button)
-    void login(){
+    public void login(){
+        String userName = userNameEditText.getText().toString();
+        String password =  userPasswordEditText.getText().toString();
+        //TODO:是否匹配,如果匹配那么
+        jumpMain();
 
     }
 
+    /**
+     * 点击跳转注册
+     */
     @Click(R.id.activity_login_register_button)
-
-
-    void loginQQ() {
-        loading(true);
-        type = AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO;
-        Platform qq = ShareSDK.getPlatform(QQ.NAME);
-        qq.SSOSetting(false);  //设置false表示使用SSO授权方式
-        qq.setPlatformActionListener(this); // 设置分享事件回调
-        qq.authorize();
-    }
-
-
-    private void loading(boolean isshow) {
-        contentView.setVisibility(isshow ? View.GONE : View.VISIBLE);
-        loadView.setVisibility(!isshow ? View.GONE : View.VISIBLE);
-    }
-
-    private void onError(String msg) {
-        SnackUtils.show(loadView, msg);
-        loading(false);
+    public void register(){
+        jumpRegister();
     }
 
     private void onNext(User user) {
@@ -133,46 +93,16 @@ public class LoginActivity extends BaseActivity
         this.finish();
     }
 
-    @Override
-    public void onComplete(Platform plat, int i, HashMap<String, Object> hashMap) {
-        AVUser.AVThirdPartyUserAuth auth =
-                new AVUser.AVThirdPartyUserAuth(plat.getDb().getToken(), String.valueOf(plat.getDb()
-                        .getExpiresTime()), type, plat.getDb()
-                        .getUserId());
-        User.loginWithAuthData(User.class, auth, new LogInCallback<User>() {
-            @Override
-            public void done(User user, AVException e) {
-                if (e == null) {
-                    user.setNickname(plat.getDb().getUserName());
-                    String iconUrl = plat.getDb().getUserIcon();
-                    if (iconUrl.endsWith("40")) {
-                        StringBuffer sb = new StringBuffer(iconUrl.substring(0, iconUrl.length() - 2));
-                        sb.append("100");
-                        iconUrl = sb.toString();
-                    }
-                    user.setIconurl(iconUrl);
-                    user.setDeviceId(AVInstallation.getCurrentInstallation().getInstallationId());
-                    user.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(AVException e) {
-                            onNext(user);
-                        }
-                    });
-                } else {
-                    e.printStackTrace();
-                    onError(e.getMessage());
-                }
-            }
-        });
+
+    /**
+     * 跳转注册
+     */
+    private void jumpRegister(){
+        RegisterActivity_.intent(this).start();
+        this.finish();
+
     }
 
-    @Override
-    public void onError(Platform platform, int i, Throwable throwable) {
-        onError(throwable.getMessage());
-    }
 
-    @Override
-    public void onCancel(Platform platform, int i) {
-        onError(ResUtils.getResString(this, R.string.msg_login_cancel));
-    }
+
 }
