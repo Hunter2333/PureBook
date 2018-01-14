@@ -44,12 +44,10 @@ public class LocalManager {
             public void onLocationChanged(AMapLocation aMapLocation) {
                 if (aMapLocation != null) {
                     if (aMapLocation.getErrorCode() == 0) {
-                        KLog.d("amap success:" + aMapLocation.toString());
                         callBack.onSuccess(aMapLocation);
                         count = 0;
                     } else {
                         count++;
-                        KLog.d("amap error:" + aMapLocation.getErrorCode() + "," + aMapLocation.getErrorInfo());
                         if (count == Constants.TRY_LOCAL_COUNT) {
                             count = 0;
                             callBack.onError(aMapLocation.getErrorInfo());

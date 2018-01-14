@@ -18,6 +18,7 @@ import com.socks.library.KLog;
 
 public abstract class BaseColumnFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
         extends MvpLceFragment<CV, M, V, P> {
+
     public static final String ARG_BOOKCOLUMN = "BaseColumnFragment_BookColumn";
     protected BookColumn mCurrentBookColumn;
     protected FloatingActionButton fab;
@@ -27,7 +28,6 @@ public abstract class BaseColumnFragment<CV extends View, M, V extends MvpLceVie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setRetainInstance(true);
         mCurrentBookColumn = getArguments().getParcelable(ARG_BOOKCOLUMN);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
     }
@@ -43,7 +43,6 @@ public abstract class BaseColumnFragment<CV extends View, M, V extends MvpLceVie
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         isVisible = getUserVisibleHint();
-        KLog.d(isVisible+","+hashCode());
         if (isVisible) {
             onVisible();
         } else {
@@ -54,13 +53,11 @@ public abstract class BaseColumnFragment<CV extends View, M, V extends MvpLceVie
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        KLog.d();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        KLog.d();
     }
 
     protected abstract void lazyLoad();
@@ -71,7 +68,6 @@ public abstract class BaseColumnFragment<CV extends View, M, V extends MvpLceVie
 
     private void onLazyLoad() {
         if (isViewCreate && isVisible) {
-            KLog.d();
             lazyLoad();
             changeArrowVisible();
         }

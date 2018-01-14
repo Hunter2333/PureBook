@@ -62,6 +62,11 @@ import java.lang.reflect.Method;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
+/**
+ * 书的详情Activity
+ * 继承BaseSwipeBackActivity
+ * 实现View层接口
+ */
 
 @EActivity(R.layout.activity_details)
 public class DetailsActivity extends BaseSwipeBackActivity implements DetailsView {
@@ -180,7 +185,6 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
                         - mCollapsingToolbarLayout.getMinimumHeight();
                 h *= 0.9;
                 float a = (float) ((h + verticalOffset) / h);
-//                KLog.d(h + "," + verticalOffset + "," + a);
                 mIcon.setAlpha(a);
             }
         });

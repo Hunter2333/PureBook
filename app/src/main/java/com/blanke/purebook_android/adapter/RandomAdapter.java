@@ -64,17 +64,8 @@ public class RandomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_random_book, parent, false);
-        } else {
-//            KLog.d(position + " view not null");
         }
-//        KLog.d(position + ":" + convertView.toString());
         Integer lastPosition = (Integer) convertView.getTag();
-//        if (lastPosition != null && lastPosition == position) {
-//            KLog.d("old:"+position);
-//            return convertView;
-//        }
-//        KLog.d(position);
-//        convertView.setTag(position);
         ImageView imageView = ViewHolderHelper.get(convertView, R.id.item_random_image);
         TextView textViewTitle = ViewHolderHelper.get(convertView, R.id.item_random_title);
         TextView textViewInfo = ViewHolderHelper.get(convertView, R.id.item_random_info);

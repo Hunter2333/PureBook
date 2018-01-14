@@ -1,10 +1,10 @@
-package com.blanke.purebook_android.core.booklist.persenter;
+package com.blanke.purebook_android.core.booklist.presenter;
 
 import com.avos.avoscloud.AVQuery;
 import com.blanke.purebook_android.bean.BookColumn;
 import com.blanke.purebook_android.rx.RxBookColumn;
 
-public class BookListPersenterImpl extends BookListPersenter {
+public class BookListPresenterImpl extends BookListPresenter {
 
     private boolean pullToRefresh;
 

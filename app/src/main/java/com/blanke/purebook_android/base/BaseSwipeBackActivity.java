@@ -14,10 +14,16 @@ import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 
+/**
+ *
+ * @author chrischen
+ */
+
 public class BaseSwipeBackActivity extends BaseActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

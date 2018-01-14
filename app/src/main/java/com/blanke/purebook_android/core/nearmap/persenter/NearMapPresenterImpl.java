@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by blanke on 16-4-3.
  */
-public class NearMapPersenterImpl extends NearMapPersenter {
+public class NearMapPresenterImpl extends NearMapPresenter {
     @Override
     public void getNearFriend(boolean pullToRefresh, AVGeoPoint location, int size) {
         if (location == null) {

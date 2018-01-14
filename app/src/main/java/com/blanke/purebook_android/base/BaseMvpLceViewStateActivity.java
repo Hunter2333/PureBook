@@ -11,6 +11,15 @@ import com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.changeskin.SkinManager;
 
+/**
+ *
+ * 继承Mosby库的MvpLceViewStateActivity
+ * @param <CV>
+ * @param <M>数据
+ * @param <V>View
+ * @param <P>Presenter
+ */
+
 public abstract class BaseMvpLceViewStateActivity<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>> extends MvpLceViewStateActivity<CV, M, V, P> {
     protected void onPause() {
         super.onPause();

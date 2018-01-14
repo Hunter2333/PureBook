@@ -30,7 +30,7 @@ import java.util.List;
 
 @EFragment(R.layout.fragment_column)
 public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, List<BookColumn>, ColumnView, ColumnPresenter> implements ColumnView {
-
+    public static final String ARGS_BOOKCOLUMN = "ColumnFragment_mCurrentBookColumn";
     @ViewById(R.id.fragment_column_tablayout)
     TabLayout mTabLayout;
     @ViewById(R.id.fragment_column_viewpager)
@@ -52,36 +52,28 @@ public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, Li
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        KLog.d(hidden);
-//        if (!hidden) {
-//            changeArrowVisible();
-//        }
         pageAdapter.getItem(mViewPager.getCurrentItem()).setUserVisibleHint(!hidden);//回调子类，show/hide
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCurrentBookColumn = getArguments().getParcelable(ARGS_BOOKCOLUMN);
-        KLog.d(mCurrentBookColumn.getName() + this.hashCode());
     }
 
     @AfterViews
@@ -89,7 +81,6 @@ public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, Li
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         pageAdapter = new ColumnFragmentAdapter(getChildFragmentManager());
         mViewPager.setAdapter(pageAdapter);
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
@@ -114,7 +105,6 @@ public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, Li
 
     @Override
     public void setData(List<BookColumn> data) {
-        KLog.d(mCurrentBookColumn.getName());
         if (data == null || data.size() == 0) {
             return;
         }
@@ -126,17 +116,14 @@ public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, Li
             mTabLayout.addTab(mTabLayout.newTab().setText(item.getName()));
             pageAdapter.addTab(item);
         }
-        KLog.d("setData time=" + (System.currentTimeMillis() - t1));
         pageAdapter.notifyDataSetChanged();
         mViewPager.setOffscreenPageLimit(data.size());
-        KLog.d("setData time=" + (System.currentTimeMillis() - t1));
         if (data.size() > 1) {
             mTabLayout.setVisibility(View.VISIBLE);
             mTabLayout.setupWithViewPager(mViewPager);
         } else {
             mTabLayout.setVisibility(View.GONE);
         }
-        KLog.d("setData time=" + (System.currentTimeMillis() - t1));
         SkinManager.getInstance().notifyChangedListeners();
     }
 

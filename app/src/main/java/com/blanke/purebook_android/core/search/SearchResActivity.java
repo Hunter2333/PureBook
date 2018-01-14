@@ -31,6 +31,13 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
+/**
+ * 搜索activity
+ * 继承BaseMvpLceViewStateActivity
+ * 实现SearchResView接口
+ * @author chrischen
+ */
+
 @EActivity(R.layout.activity_searchres)
 public class SearchResActivity extends BaseMvpLceViewStateActivity<LinearLayout, List<Book>, SearchResView, SearchResPresenter>
         implements SearchResView {
@@ -38,8 +45,7 @@ public class SearchResActivity extends BaseMvpLceViewStateActivity<LinearLayout,
     RecyclerViewPager mRecyclerView;
 
     private List<Book> books;
-    @Extra
-    String key;
+    @Extra String key;
     private BaseRecyclerAdapter<Book> mAdapter;
     private int page_count = Constants.PAGE_COUNT;
 
@@ -73,6 +79,10 @@ public class SearchResActivity extends BaseMvpLceViewStateActivity<LinearLayout,
         StatusBarCompat.setStatusBarColor(this, c);
     }
 
+    /**
+     * 设置主题
+     * @param o
+     */
     private void applyTheme(Object o) {
         setStatusBarColor();
     }
@@ -101,17 +111,22 @@ public class SearchResActivity extends BaseMvpLceViewStateActivity<LinearLayout,
         return new SearchResPresenterImpl();
     }
 
+    /**
+     * 设置呈现的数据
+     * @param data
+     */
     @Override
     public void setData(List<Book> data) {
         if (data == null) {
             return;
         }
-        int size = data.size();
-        if (size == 1) {//当搜索结果只有一个时，直接跳转到该book的详情页
+        int size = data.size();//获取搜索结果数量
+        if (size == 1) {
+            //当搜索结果只有一个时，直接跳转到该book的详情页
             startDetails(null, data.get(0));
             finish();
         } else if (size == 0) {
-            Toast.makeText(SearchResActivity.this, R.string.msg_search_none, Toast.LENGTH_LONG).show();
+            Toast.makeText(SearchResActivity.this, R.string.msg_search_none, Toast.LENGTH_LONG).show();//搜索结果为0，提示没有找到书籍
             finish();
         } else {
             this.books = data;

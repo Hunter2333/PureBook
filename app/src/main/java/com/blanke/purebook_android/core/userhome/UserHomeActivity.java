@@ -43,6 +43,11 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
 
+/**
+ * 用户主页Activity
+ * @author chrischen
+ */
+
 @EActivity(R.layout.activity_user_home)
 public class UserHomeActivity extends BaseSwipeBackActivity {
 
@@ -156,15 +161,10 @@ public class UserHomeActivity extends BaseSwipeBackActivity {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
-                if (swatch != null) {
-//                    changeColor(swatch.getTitleTextColor());
-                }
             }
         });
         mCollapsingToolbarLayout.setBackground(new BitmapDrawable(getResources(),
                 StackBlur.blurNativelyPixels(BitmapUtils.addBlackBitmap(bitmap), Constants.BLUE_VALUE, false)));
-//        mTabLayout.setBackground(new BitmapDrawable(getResources(),
-//                StackBlur.blurNativelyPixels(BitmapUtils.addBlackBitmap(bitmap), Constants.BLUE_VALUE, false)));
 
     }
 

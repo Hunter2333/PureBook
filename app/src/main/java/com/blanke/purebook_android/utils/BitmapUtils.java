@@ -63,7 +63,6 @@ public class BitmapUtils {
 
     private static boolean savaImageInNewThread(Context context, Bitmap bitmap, String fileName) throws IOException {
         File f = new File(getPhotoPath(context), fileName);
-        KLog.d(f.getAbsolutePath());
         if (!f.exists()) {
             FileOutputStream out = null;
             f.getParentFile().mkdirs();

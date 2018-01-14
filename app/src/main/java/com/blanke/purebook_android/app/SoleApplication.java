@@ -48,12 +48,10 @@ public class SoleApplication extends Application {
     }
 
     private void initUM() {
-//        AnalyticsConfig.setChannel("test");
-//        AnalyticsConfig.enableEncrypt(true);
+
     }
 
     private void initAvos() {
-//        KLog.d();
         AVUser.alwaysUseSubUserClass(User.class);
         AVObject.registerSubclass(Book.class);
         AVObject.registerSubclass(Tag.class);
@@ -69,16 +67,13 @@ public class SoleApplication extends Application {
     }
 
     private void initSkin() {
-//        KLog.d();
         SkinManager.getInstance().init(this);
     }
 
     private void initImageLoader() {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration
                 .Builder(this)
-//                .memoryCacheExtraOptions(500,700)
                 .imageDownloader(new BaseImageDownloader(this, 5 * 1000, 10 * 1000))
-//                .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
     }

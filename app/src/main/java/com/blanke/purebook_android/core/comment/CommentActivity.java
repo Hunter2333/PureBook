@@ -19,8 +19,8 @@ import com.blanke.purebook_android.bean.BookComment;
 import com.blanke.purebook_android.bean.CommentMenuItem;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.constants.Constants;
-import com.blanke.purebook_android.core.comment.presenter.CommentPersenter;
-import com.blanke.purebook_android.core.comment.presenter.CommentPersenterImpl;
+import com.blanke.purebook_android.core.comment.presenter.CommentPresenter;
+import com.blanke.purebook_android.core.comment.presenter.CommentPresenterImpl;
 import com.blanke.purebook_android.core.comment.view.CommentView;
 import com.blanke.purebook_android.core.userhome.UserHomeActivity;
 import com.blanke.purebook_android.utils.DateUtils;
@@ -59,7 +59,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 @EActivity(R.layout.activity_comment)
 public class CommentActivity extends
-        BaseSwipeMvpLceStateActivity<LinearLayout, List<BookComment>, CommentView, CommentPersenter>
+        BaseSwipeMvpLceStateActivity<LinearLayout, List<BookComment>, CommentView, CommentPresenter>
         implements CommentView, NeuSwipeRefreshLayout.OnRefreshListener {
 
     @ViewById(R.id.activity_comment_recyclerview)
@@ -74,7 +74,7 @@ public class CommentActivity extends
     @Extra
     Book book;
 
-    private CommentPersenter mPersenter;
+    private CommentPresenter mPersenter;
     private int currentPage = 0;
     private int PAGE_COUNT = Constants.PAGE_COUNT;
     private BaseRecyclerAdapter<BookComment> mAdapter;
@@ -96,7 +96,6 @@ public class CommentActivity extends
         mAdapter = new BaseRecyclerAdapter<BookComment>(this, R.layout.item_recyclerview_bookcomment) {
             @Override
             protected void convert(BaseAdapterHelper helper, BookComment item) {
-                KLog.json(item.toString());
                 final User user = item.getUser();
                 helper.getTextView(R.id.item_comment_user).setText(user.getNickname());
                 helper.getTextView(R.id.item_comment_time)
@@ -104,8 +103,6 @@ public class CommentActivity extends
                 BookComment reply = item.getReply();
                 TextView tv = helper.getTextView(R.id.item_comment_content);
                 if (reply != null) {
-                    KLog.json(reply.getUser().toString());
-                    KLog.json(reply.getUser().getNickname());
                     tv.setText(ResUtils.getResString(CommentActivity.this, R.string.title_reply)
                             + reply.getUser().getNickname() + ":" + item.getContent());
                 } else {
@@ -229,8 +226,8 @@ public class CommentActivity extends
 
     @NonNull
     @Override
-    public CommentPersenter createPresenter() {
-        return mPersenter = new CommentPersenterImpl();
+    public CommentPresenter createPresenter() {
+        return mPersenter = new CommentPresenterImpl();
     }
 
     @Override

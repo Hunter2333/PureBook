@@ -50,7 +50,7 @@ import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 
 
-public class CurstumSearchView extends FrameLayout implements Filter.FilterListener, TintableBackgroundView {
+public class CustomSearchView extends FrameLayout implements Filter.FilterListener, TintableBackgroundView {
     public static final int REQUEST_VOICE = 9999;
 
     private MenuItem mMenuItem;
@@ -100,15 +100,15 @@ public class CurstumSearchView extends FrameLayout implements Filter.FilterListe
 
     private Context mContext;
 
-    public CurstumSearchView(Context context) {
+    public CustomSearchView(Context context) {
         this(context, null);
     }
 
-    public CurstumSearchView(Context context, AttributeSet attrs) {
+    public CustomSearchView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CurstumSearchView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomSearchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs);
 
         mContext = context;
@@ -217,7 +217,7 @@ public class CurstumSearchView extends FrameLayout implements Filter.FilterListe
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mUserQuery = s;
                 startFilter(s);
-                CurstumSearchView.this.onTextChanged(s);
+                CustomSearchView.this.onTextChanged(s);
             }
 
             @Override
@@ -239,7 +239,7 @@ public class CurstumSearchView extends FrameLayout implements Filter.FilterListe
 
     private void startFilter(CharSequence s) {
         if (mAdapter != null && mAdapter instanceof Filterable) {
-            ((Filterable) mAdapter).getFilter().filter(s, CurstumSearchView.this);
+            ((Filterable) mAdapter).getFilter().filter(s, CustomSearchView.this);
         }
     }
 
@@ -647,7 +647,6 @@ public class CurstumSearchView extends FrameLayout implements Filter.FilterListe
     }
 
     public void reveal(final View view, final AnimationUtil.AnimationListener listener, int cx, int cy, int startRadius, int endRadius) {
-//        KLog.d(cx + "," + cy);
         SupportAnimator animator =
                 ViewAnimationUtils.createCircularReveal(view, cx, cy, startRadius, endRadius);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());

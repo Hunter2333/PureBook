@@ -8,7 +8,7 @@ import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.rx.RxBookComment;
 
 
-public class CommentPersenterImpl extends CommentPersenter {
+public class CommentPresenterImpl extends CommentPresenter {
 
     private boolean pullToRefresh;
 

@@ -117,7 +117,6 @@ public class LoginActivity extends BaseActivity
         AVAnonymousUtils.logIn(new LogInCallback<AVUser>() {
             @Override
             public void done(AVUser user, AVException e) {
-                KLog.i("AVAnonymous  login success ");
                 jumpMain();
             }
         });
@@ -134,8 +133,6 @@ public class LoginActivity extends BaseActivity
     }
 
     private void onNext(User user) {
-        KLog.json(user.toString());
-        //SnackUtils.show(getWindow().getDecorView(), user.toString());
         jumpMain();
     }
 
@@ -154,7 +151,6 @@ public class LoginActivity extends BaseActivity
             @Override
             public void done(User user, AVException e) {
                 if (e == null) {
-//                    KLog.json(plat.getDb().exportData());
                     user.setNickname(plat.getDb().getUserName());
                     String iconUrl = plat.getDb().getUserIcon();
                     if (iconUrl.endsWith("40")) {

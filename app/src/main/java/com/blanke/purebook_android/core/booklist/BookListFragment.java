@@ -15,8 +15,8 @@ import com.blanke.purebook_android.base.BaseColumnFragment;
 import com.blanke.purebook_android.bean.Book;
 import com.blanke.purebook_android.bean.BookColumn;
 import com.blanke.purebook_android.constants.Constants;
-import com.blanke.purebook_android.core.booklist.persenter.BookListPersenter;
-import com.blanke.purebook_android.core.booklist.persenter.BookListPersenterImpl;
+import com.blanke.purebook_android.core.booklist.presenter.BookListPresenter;
+import com.blanke.purebook_android.core.booklist.presenter.BookListPresenterImpl;
 import com.blanke.purebook_android.core.booklist.view.BookListView;
 import com.blanke.purebook_android.core.details.DetailsActivity_;
 import com.blanke.purebook_android.utils.SkinUtils;
@@ -40,7 +40,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 @EFragment(R.layout.fragment_book_item)
 public class BookListFragment extends
-        BaseColumnFragment<SwipeRefreshLayout, List<Book>, BookListView, BookListPersenter>
+        BaseColumnFragment<SwipeRefreshLayout, List<Book>, BookListView, BookListPresenter>
         implements BookListView, NeuSwipeRefreshLayout.OnRefreshListener {
     private static final long LAZY_DELAY_TIME = Constants.LAZY_DELAY_TIME;
     @ViewById(R.id.fragment_columnitem_recyclerview)
@@ -70,26 +70,22 @@ public class BookListFragment extends
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        KLog.d(mCurrentBookColumn.getName());
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        KLog.d(mCurrentBookColumn.getName() + hashCode());
     }
 
     @Override
@@ -104,15 +100,13 @@ public class BookListFragment extends
         EventBus.getDefault().register(this);
         applyTheme(null);
         mAdapter = new BookItemAdapter(getActivity());
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);//设置recycler view的adapter
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-//        KLog.d(isNetworkFinish);
         mRecyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 Book book = mAdapter.getBooks().get(position);
-//                DetailsActivity_.intent(getActivity()).book(book).start();
                 DetailsActivity_.start(getActivity(),
                         (ImageView) view.findViewById(R.id.item_book_image), book);
             }
@@ -138,12 +132,6 @@ public class BookListFragment extends
         }
     }
 
-//    @Override
-//    public LceViewState<List<Book>, BookListView> createViewState() {
-//        return new CastedArrayListLceViewState<>();
-//    }
-
-    //    @Override
     public List<Book> getData() {
         return mAdapter.getBooks() == null ? null : new ArrayList<>(mAdapter.getBooks());
     }
@@ -154,20 +142,18 @@ public class BookListFragment extends
     }
 
     @Override
-    public BookListPersenter createPresenter() {
-        return new BookListPersenterImpl();
+    public BookListPresenter createPresenter() {
+        return new BookListPresenterImpl();
     }
 
     @Override
     public void setData(List<Book> data) {
-        KLog.d(mCurrentBookColumn.getName());
         mSwipeRefreshLayout.setRefreshing(false);
         if (data == null || data.size() == 0) {
             return;
         }
         if (currentPage == 0) {
             mAdapter.setData(data);
-            KLog.d();
             mRecyclerView.postDelayed(() -> scrollTop(), 800);
         } else {
             mAdapter.addData(data);

@@ -5,6 +5,10 @@ import android.support.v4.app.Fragment;
 
 import com.avos.avoscloud.AVAnalytics;
 
+/**
+ * Fragment基类
+ * @author chrischen
+ */
 public abstract class BaseFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);

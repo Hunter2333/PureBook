@@ -24,8 +24,8 @@ import com.blanke.purebook_android.base.BaseColumnFragment;
 import com.blanke.purebook_android.bean.BookColumn;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.constants.Constants;
-import com.blanke.purebook_android.core.nearmap.persenter.NearMapPersenter;
-import com.blanke.purebook_android.core.nearmap.persenter.NearMapPersenterImpl;
+import com.blanke.purebook_android.core.nearmap.persenter.NearMapPresenter;
+import com.blanke.purebook_android.core.nearmap.persenter.NearMapPresenterImpl;
 import com.blanke.purebook_android.core.nearmap.view.NearMapView;
 import com.blanke.purebook_android.core.userhome.UserHomeActivity;
 import com.blanke.purebook_android.manager.LocalManager;
@@ -44,7 +44,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by blanke on 16-4-3.
  */
 @EFragment(R.layout.fragment_near_map)
-public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>, NearMapView, NearMapPersenter>
+public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>, NearMapView, NearMapPresenter>
         implements NearMapView, LocationSource {
     @ViewById(R.id.fragment_map_map)
     MapView mapView;
@@ -59,7 +59,7 @@ public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>
     private AMap aMap;
     private Bundle savedInstanceState;
     private LocalManager localManager;
-    private NearMapPersenter mPersenter;
+    private NearMapPresenter mPersenter;
     private AVGeoPoint location;
     private User user;
 
@@ -145,9 +145,9 @@ public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>
     }
 
     @Override
-    public NearMapPersenter createPresenter() {
+    public NearMapPresenter createPresenter() {
         if (mPersenter == null) {
-            mPersenter = new NearMapPersenterImpl();
+            mPersenter = new NearMapPresenterImpl();
         }
         return mPersenter;
     }
@@ -157,7 +157,6 @@ public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>
         if (data == null) {
             return;
         }
-//        KLog.json(data.toString());
         isFirstNetworkFinish = true;
         addMapUsers(data);
     }

@@ -38,8 +38,8 @@ import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.core.column.ColumnFragment;
 import com.blanke.purebook_android.core.feedback.FeedActivity;
 import com.blanke.purebook_android.core.login.LoginActivity_;
-import com.blanke.purebook_android.core.main.presenter.MainPersenter;
-import com.blanke.purebook_android.core.main.presenter.MainPersenterImpl;
+import com.blanke.purebook_android.core.main.presenter.MainPresenter;
+import com.blanke.purebook_android.core.main.presenter.MainPresenterImpl;
 import com.blanke.purebook_android.core.main.view.MainView;
 import com.blanke.purebook_android.core.scan.CommonScanActivity_;
 import com.blanke.purebook_android.core.search.SearchResActivity_;
@@ -49,7 +49,7 @@ import com.blanke.purebook_android.manager.LocalManager;
 import com.blanke.purebook_android.utils.BitmapUtils;
 import com.blanke.purebook_android.utils.SkinUtils;
 import com.blanke.purebook_android.utils.StatusBarCompat;
-import com.blanke.purebook_android.view.CurstumSearchView;
+import com.blanke.purebook_android.view.CustomSearchView;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.CastedArrayListLceViewState;
 import com.melnykov.fab.FloatingActionButton;
@@ -69,35 +69,55 @@ import org.simple.eventbus.Subscriber;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main的Activity
+ * 继承封装的BaseMvpLceViewStateActivity
+ * 实现MainView接口
+ * @author chrischen
+ */
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookColumn>, MainView, MainPersenter>
+public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookColumn>, MainView, MainPresenter>
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
     private static final String FRAGGMENT_TAG = "FRAGGMENT_TAG";
+
+    //android annotation 绑定控件
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
+
     @ViewById(R.id.contentView)
     DrawerLayout drawer;
+
+    //侧边栏
     @ViewById(R.id.nav_view)
     NavigationView navigationView;
+
+    //头像
     ImageView mImageIcon;
+
+    //用户名
     TextView mTvNickName;
+
+    //搜索框
     @ViewById(R.id.search_view)
-    CurstumSearchView searchView;
+    CustomSearchView searchView;
+
+    //悬浮按钮
     @ViewById(R.id.fab)
     FloatingActionButton fab;
+
     @ViewById(R.id.activity_main_coordlayout)
     CoordinatorLayout mCoordinatorLayout;
+
     @ViewById(R.id.nav_head_layout)
     View navLayout;
 
     private List<BookColumn> bookColumns;
 
-    private User currentUser;
+    private User currentUser;//当前用户
     private int mSelectPostion = -1;
     private Fragment mSelectFragment;
     private ActionBarDrawerToggle toggle;
     private Fragment[] fragments;
-    private boolean isVisible;
     private FeedbackAgent agent;
     private Snackbar backPressSnackbar;//两次按下返回退出
     private LocalManager localManager;
@@ -107,14 +127,13 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
     void init() {
         EventBus.getDefault().register(this);
         applyTheme(null);
-        long t1 = System.currentTimeMillis();
         setSupportActionBar(toolbar);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        searchView.setOnQueryTextListener(new CurstumSearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new CustomSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 SearchResActivity_.intent(MainActivity.this).key(query).start();
@@ -126,14 +145,13 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
                 return false;
             }
         });
-        searchView.setVoiceViewClickListener(new CurstumSearchView.VoiceViewClickListener() {
+        searchView.setVoiceViewClickListener(new CustomSearchView.VoiceViewClickListener() {
             @Override
             public void onClick(View v) {
                 CommonScanActivity_.intent(MainActivity.this).start();
                 searchView.closeSearch();
             }
         });
-        KLog.d("init time:" + (System.currentTimeMillis() - t1));
     }
 
     private void initCloud() {
@@ -142,14 +160,14 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
     }
 
     private void replaceFragment(int position) {
-        long t1 = System.currentTimeMillis();
         if (position != mSelectPostion) {
             searchView.closeSearch();//选择其他menu，关闭搜索框
             mSelectPostion = position;
             BookColumn item = bookColumns.get(position);
-            toolbar.setTitle(item.getName());
-            FragmentTransation trans = getSupportFragmentManager().beginTransaction();
+            toolbar.setTitle(item.getName());//设置toolbar title
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
             hideAllFragment(trans);
+
             if (fragments[position] != null) {
                 trans.show(fragments[position]);
             } else {
@@ -157,11 +175,11 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
             }
             trans.commit();
             mSelectFragment = fragments[position];
-            KLog.d("replaceFragment time:" + (System.currentTimeMillis() - t1));
+
         }
     }
 
-    private void  fhideAllFragment(FragmentTransaction trans) {
+    private void hideAllFragment(FragmentTransaction trans) {
         for (Fragment f : fragments) {
             if (f != null) {
                 trans.hide(f);
@@ -176,11 +194,14 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         return fragments[position];
     }
 
+    /**
+     * 初始化侧滑栏
+     */
     private void initNavigationMenu() {
-        long t1 = System.currentTimeMillis();
         currentUser = User.getCurrentUser(User.class);
-        Menu menu = navigationView.getMenu();
-        int random = (int) (Math.random() * 9 + 1);
+        Menu menu = navigationView.getMenu();//获取menu实例
+
+        int random = (int) (Math.random() * 9 + 1);//获取0到10的随机数
         int idbase = random << 10;
         int i = 0;
         fragments = new Fragment[bookColumns.size()];
@@ -205,6 +226,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
             i++;
         }
         menu.setGroupCheckable(0, true, true);//single
+
         if (currentUser != null && !currentUser.isAnonymous()) {
             navigationView.postDelayed(() -> {
                 mTvNickName = (TextView) navigationView.findViewById(R.id.nav_nickname);
@@ -234,9 +256,9 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
                 mImageIcon.setOnClickListener(v -> UserHomeActivity.start(MainActivity.this, mImageIcon, currentUser));
             }, 800);
         }
-        KLog.d("initNavigationMenu time:" + (System.currentTimeMillis() - t1));
     }
 
+    //退出登录
     private void logout() {
         User.logOut();
         LoginActivity_.intent(this).start();
@@ -264,7 +286,6 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
         return true;
@@ -287,7 +308,6 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
             int id = item.getItemId();
             switch (id) {
                 case R.id.navigation_feedback:
-//                    agent.startDefaultThreadActivity();
                     Intent intent = new Intent(this, FeedActivity.class);
                     startActivity(intent);
                     break;
@@ -350,12 +370,14 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         });
     }
 
+    //设置页面主题
     @Subscriber(tag = Constants.EVENT_THEME_CHANGE)
     public void applyTheme(Object o) {
         setStatusBarColor();
         setFabColor();
         setMenuColor();
     }
+
 
     @Override
     public LceViewState<List<BookColumn>, MainView> createViewState() {
@@ -374,8 +396,8 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
 
     @NonNull
     @Override
-    public MainPersenter createPresenter() {
-        return new MainPersenterImpl();
+    public MainPresenter createPresenter() {
+        return new MainPresenterImpl();
     }
 
     @Override

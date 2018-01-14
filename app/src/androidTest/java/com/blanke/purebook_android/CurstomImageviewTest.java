@@ -28,7 +28,6 @@ public class CurstomImageviewTest extends InstrumentationTestCase {
     @Override
     public void tearDown() throws Exception {
         super.tearDown();
-        KLog.d("activity  test end   什么鬼shenmegui");
         Thread.sleep(10000);
     }
 }

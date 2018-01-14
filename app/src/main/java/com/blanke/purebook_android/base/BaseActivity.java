@@ -8,6 +8,10 @@ import com.avos.avoscloud.AVAnalytics;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.changeskin.SkinManager;
 
+/**
+ * Activity基类
+ * @author chrischen
+ */
 
 public abstract class BaseActivity extends AppCompatActivity {
 
