@@ -70,6 +70,8 @@ public class User extends AVUser {
         super(in);
     }
 
+    public User() {}
+
     public void setDistrict(String district) {
         put(DISTRICT, district);
     }

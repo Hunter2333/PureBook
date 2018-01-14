@@ -17,6 +17,10 @@ public class CommentMenuItem {
         this.title = title;
     }
 
+    public void setOp(OP op) {
+        this.op = op;
+    }
+
     public OP getOp() {
         return op;
     }
