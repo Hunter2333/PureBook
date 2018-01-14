@@ -41,7 +41,7 @@ public class Book extends AVObject {
     }
 
     public String getImgM() {return getString(IMG_M);}
-    
+
     public String getIntroContent() {
         return getString(INTRO_CONTENT);
     }

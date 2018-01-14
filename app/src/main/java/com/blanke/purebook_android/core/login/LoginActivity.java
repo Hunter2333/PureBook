@@ -44,6 +44,7 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
  * 继承封装的BaseActivity基类
  */
 
+//TODO:
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends BaseActivity
         implements PlatformActionListener {

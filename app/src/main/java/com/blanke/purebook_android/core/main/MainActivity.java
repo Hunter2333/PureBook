@@ -75,6 +75,7 @@ import java.util.List;
  * 实现MainView接口
  * @author chrischen
  */
+
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookColumn>, MainView, MainPresenter>
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -159,6 +160,10 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         agent.sync();
     }
 
+    /**
+     * 根据侧边栏替换fragment
+     * @param position
+     */
     private void replaceFragment(int position) {
         if (position != mSelectPostion) {
             searchView.closeSearch();//选择其他menu，关闭搜索框

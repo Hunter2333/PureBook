@@ -14,6 +14,7 @@ import com.zhy.changeskin.SkinManager;
 public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends MvpActivity<V, P> {
     protected void onPause() {
         super.onPause();
+        //TODO:
         AVAnalytics.onPause(this);
         MobclickAgent.onPause(this);
     }
