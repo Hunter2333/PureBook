@@ -5,6 +5,11 @@ import android.os.Parcel;
 import com.avos.avoscloud.AVGeoPoint;
 import com.avos.avoscloud.AVUser;
 
+/**
+ * 用户Model
+ * @author chrischen
+ */
+
 public class User extends AVUser {
     public static final String NICKNAME = "nickname";
     public static final String ICONURL = "iconurl";
@@ -59,9 +64,6 @@ public class User extends AVUser {
 
     public AVGeoPoint getLocation() {
         return getAVGeoPoint(LOCATION);
-    }
-
-    public User() {
     }
 
     public User(Parcel in) {

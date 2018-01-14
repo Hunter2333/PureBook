@@ -1,5 +1,9 @@
 package com.blanke.purebook_android.bean;
 
+/**
+ *
+ */
+
 public class CommentMenuItem {
     public static enum OP {
         DELETE, SHOW, REPLY
@@ -15,10 +19,6 @@ public class CommentMenuItem {
 
     public OP getOp() {
         return op;
-    }
-
-    public void setOp(OP op) {
-        this.op = op;
     }
 
     public String getTitle() {

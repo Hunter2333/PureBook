@@ -3,6 +3,10 @@ package com.blanke.purebook_android.bean;
 import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVObject;
 
+/**
+ *
+ */
+
 @AVClassName("user_book_like")
 public class UserBookLike extends AVObject {
     public static final String USER = "user";

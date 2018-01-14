@@ -4,8 +4,9 @@ import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVObject;
 
 /**
- * Created by Blanke on 16-3-4.
+ * 书籍标签Model
  */
+
 @AVClassName("Tag")
 public class Tag extends AVObject {
     public static final String NAME = "name";
