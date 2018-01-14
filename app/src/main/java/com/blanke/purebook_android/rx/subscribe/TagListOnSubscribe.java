@@ -6,9 +6,7 @@ import com.blanke.purebook_android.rx.subscribe.base.BaseCloudOnSubscribe;
 
 import java.util.List;
 
-/**
- * Created by Blanke on 16-3-2.
- */
+//TODO:
 public class TagListOnSubscribe extends BaseCloudOnSubscribe<List<Tag>> {
     private int limit, skip;
 

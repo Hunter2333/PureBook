@@ -28,6 +28,12 @@ import java.util.List;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
+/**
+ * 标签列表的Fragment
+ * 继承封装的BaseColumnFragment
+ * 实现标签列表view层接口
+ * @author chrischen
+ */
 @EFragment(R.layout.fragment_tag_item)
 public class TagListFragment extends BaseColumnFragment<LinearLayout, List<Tag>, TagListView, TagListPresenter>
         implements TagListView {

@@ -6,6 +6,7 @@ import com.blanke.purebook_android.utils.RxUtils;
 
 import rx.Observable;
 
+//TODO:
 public class RxAVUser {
     public Observable<AVUser> login(String username, String password) {
         return RxUtils.schedulerNewThread(Observable.create(new AVUserLoginOnSubscribe(username, password)));

@@ -7,6 +7,7 @@ import com.blanke.purebook_android.rx.subscribe.base.BaseCloudOnSubscribe;
 
 import java.util.List;
 
+//TODO:
 public class BookListOnSubscribe extends BaseCloudOnSubscribe<List<Book>> {
     private BookColumn column;
     private int limit, skip;

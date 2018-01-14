@@ -3,6 +3,7 @@ package com.blanke.purebook_android.adapter;
 import android.util.SparseArray;
 import android.view.View;
 
+//TODO:
 public class ViewHolderHelper {
     public static <T extends View> T get(View view, int id) {
         SparseArray<View> viewHolder = (SparseArray<View>) view.getTag();

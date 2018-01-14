@@ -15,7 +15,8 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 
 /**
- *
+ *滑动返回Activity基类
+ * 实现SwipeBackActivityBase
  * @author chrischen
  */
 
@@ -23,7 +24,7 @@ public class BaseSwipeBackActivity extends BaseActivity implements SwipeBackActi
     private SwipeBackActivityHelper mHelper;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

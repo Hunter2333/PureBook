@@ -45,6 +45,7 @@ import org.androidannotations.annotations.res.StringRes;
 
 /**
  * 用户主页Activity
+ * 继承封装的BaseSwipeBackActivity
  * @author chrischen
  */
 
@@ -52,35 +53,25 @@ import org.androidannotations.annotations.res.StringRes;
 public class UserHomeActivity extends BaseSwipeBackActivity {
 
     private static String ARG_NAME_BEAN = "UserHomeActivity_bean";
-    @ViewById(R.id.toolbar3)
-    Toolbar toolbar;
-    @ViewById(R.id.activity_details_toolbar_layout)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @ViewById(R.id.activity_details_appbar)
-    AppBarLayout mAppBarLayout;
-    @ViewById(R.id.activity_details_coordlayout)
-    CoordinatorLayout mCoordinatorLayout;
-    @ViewById(R.id.activity_userhome_icon)
-    ImageView mIcon;
-    @ViewById(R.id.activity_userhome_location)
-    TextView mTextLocation;
-    @ViewById(R.id.activity_userhome_head)
-    LinearLayout mLayoutHead;
-    @ViewById(R.id.activity_userhome_tablayout)
-    TabLayout mTabLayout;
-    @ViewById(R.id.activity_userhome_viewpager)
-    ViewPager mViewPager;
+    @ViewById(R.id.toolbar3) Toolbar toolbar;
+    @ViewById(R.id.activity_details_toolbar_layout) CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @ViewById(R.id.activity_details_appbar) AppBarLayout mAppBarLayout;
+    @ViewById(R.id.activity_details_coordlayout) CoordinatorLayout mCoordinatorLayout;
+    @ViewById(R.id.activity_userhome_icon) ImageView mIcon;
+    @ViewById(R.id.activity_userhome_location) TextView mTextLocation;
+    @ViewById(R.id.activity_userhome_head) LinearLayout mLayoutHead;
+    @ViewById(R.id.activity_userhome_tablayout) TabLayout mTabLayout;
+    @ViewById(R.id.activity_userhome_viewpager) ViewPager mViewPager;
 
-    @StringRes(R.string.title_newly_like)
-    String titleLike;
-    @StringRes(R.string.title_newly_comment)
-    String titleComment;
+    @StringRes(R.string.title_newly_like) String titleLike;
+    @StringRes(R.string.title_newly_comment) String titleComment;
     private String[] titls;
 
     private AVUser user;
     private double h;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
     public static void start(Activity activity, ImageView imageview, User user) {
         Intent intent2 = new Intent(activity, UserHomeActivity_.class);
         Bundle bundle = new Bundle();
@@ -150,12 +141,8 @@ public class UserHomeActivity extends BaseSwipeBackActivity {
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-
-    private void changeColor(int color) {
-        mTabLayout.setBackgroundColor(color);
-    }
-
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
     private void getMyColor(Bitmap bitmap) {
         new Palette.Builder(bitmap).generate(new Palette.PaletteAsyncListener() {
             @Override

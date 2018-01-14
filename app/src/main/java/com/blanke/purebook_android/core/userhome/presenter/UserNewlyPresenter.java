@@ -4,6 +4,11 @@ import com.blanke.purebook_android.core.userhome.view.UserNewlyView;
 
 import java.lang.ref.WeakReference;
 
+/**
+ *
+ */
+
+//TODO:
 public abstract class UserNewlyPresenter {
     protected WeakReference<UserNewlyView> view;
 

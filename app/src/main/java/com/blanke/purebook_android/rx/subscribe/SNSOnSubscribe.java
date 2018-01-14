@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import rx.Observable;
 import rx.Subscriber;
 
+//TODO:
 public class SNSOnSubscribe implements Observable.OnSubscribe<User> {
     private String appid, appsec, redirecturl;
     private SNSType type;

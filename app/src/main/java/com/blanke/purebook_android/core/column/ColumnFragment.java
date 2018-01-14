@@ -27,7 +27,15 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Column的Fragment类
+ * 继承封装的BaseMvpLceViewStateFragment
+ * 实现ColumnView
+ * @author chrischen
+ */
 
+
+//TODO:
 @EFragment(R.layout.fragment_column)
 public class ColumnFragment extends BaseMvpLceViewStateFragment<LinearLayout, List<BookColumn>, ColumnView, ColumnPresenter> implements ColumnView {
     public static final String ARGS_BOOKCOLUMN = "ColumnFragment_mCurrentBookColumn";

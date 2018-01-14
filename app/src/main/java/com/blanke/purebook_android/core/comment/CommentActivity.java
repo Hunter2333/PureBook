@@ -57,24 +57,25 @@ import java.util.List;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
+/**
+ * 书籍评论Activity
+ * 继承封装的BaseSwipeMvpLceStateActivity
+ * 实现CommentView
+ * @author chrischen
+ */
 @EActivity(R.layout.activity_comment)
 public class CommentActivity extends
         BaseSwipeMvpLceStateActivity<LinearLayout, List<BookComment>, CommentView, CommentPresenter>
         implements CommentView, NeuSwipeRefreshLayout.OnRefreshListener {
 
-    @ViewById(R.id.activity_comment_recyclerview)
-    FamiliarRecyclerView mRecyclerView;
-    @ViewById(R.id.activity_comment_swipelayout)
-    NeuSwipeRefreshLayout mSwipeRefreshLayout;
-    @ViewById(R.id.toolbar)
-    Toolbar toolbar;
-    @ViewById(R.id.activity_comment_edit_mycomment)
-    EditText mEditText;
+    @ViewById(R.id.activity_comment_recyclerview) FamiliarRecyclerView mRecyclerView;
+    @ViewById(R.id.activity_comment_swipelayout) NeuSwipeRefreshLayout mSwipeRefreshLayout;
+    @ViewById(R.id.toolbar) Toolbar toolbar;
+    @ViewById(R.id.activity_comment_edit_mycomment) EditText mEditText;
 
-    @Extra
-    Book book;
+    @Extra Book book;
 
-    private CommentPresenter mPersenter;
+    private CommentPresenter mPresenter;//书籍评论Presenter
     private int currentPage = 0;
     private int PAGE_COUNT = Constants.PAGE_COUNT;
     private BaseRecyclerAdapter<BookComment> mAdapter;
@@ -90,6 +91,7 @@ public class CommentActivity extends
         EventBus.getDefault().register(this);
         applyTheme(null);
         setTitle(ResUtils.getResString(this, R.string.title_comment));
+
         mUser = User.getCurrentUser(User.class);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -122,11 +124,14 @@ public class CommentActivity extends
                 User toUser = toComment.getUser();
                 ArrayList<CommentMenuItem> menus = new ArrayList<CommentMenuItem>();
                 menus.add(new CommentMenuItem(CommentMenuItem.OP.SHOW, "查看"));
-                if (!toUser.equals(mUser)) {//不能回复自己的评论
+
+                if (!toUser.equals(mUser)) {
+                    //不能回复自己的评论
                     menus.add(new CommentMenuItem(CommentMenuItem.OP.REPLY, "回复"));
                 } else {
                     menus.add(new CommentMenuItem(CommentMenuItem.OP.DELETE, "删除"));
                 }
+
                 DialogPlusBuilder dialog = DialogPlus.newDialog(CommentActivity.this)
                         .setAdapter(new QuickAdapter<CommentMenuItem>(CommentActivity.this, android.R.layout.simple_list_item_1, menus) {
                             @Override
@@ -142,6 +147,7 @@ public class CommentActivity extends
                                 SkinUtils.getTextBackgroundColorId(CommentActivity.this))
                         .setGravity(Gravity.CENTER)
                         .setCancelable(true);
+
                 long animTime = dialog.getOutAnimation().getDuration();
                 dialog.setOnItemClickListener(new OnItemClickListener() {
                     @Override
@@ -155,7 +161,7 @@ public class CommentActivity extends
                             } else if (op == CommentMenuItem.OP.SHOW) {
                                 showComment(toComment, animTime + 500);
                             } else if (op == CommentMenuItem.OP.DELETE) {
-                                mPersenter.deleteComment(toComment);
+                                mPresenter.deleteComment(toComment);
                             }
                         }
                     }
@@ -167,7 +173,6 @@ public class CommentActivity extends
 
     /**
      * 显示某条评论,dialog显示
-     *
      * @param toComment
      * @param delty
      */
@@ -183,7 +188,6 @@ public class CommentActivity extends
 
     /**
      * 回复某个评论
-     *
      * @param toComment
      */
     private void replyTo(BookComment toComment) {
@@ -200,7 +204,7 @@ public class CommentActivity extends
         mEditText.setHint(R.string.msg_comment_add);
     }
 
-    private void setStatausBarColor() {
+    private void setStatusBarColor() {
         StatusBarCompat.setStatusBarColor(this, SkinUtils.getStatusBarColor());
     }
 
@@ -208,14 +212,14 @@ public class CommentActivity extends
         mEditText.setHintTextColor(SkinUtils.getTextColor());
     }
 
-    private void setSwiptLyaoutColor() {
+    private void setSwipeLayoutColor() {
         mSwipeRefreshLayout.setProgressBackgroundColor(SkinUtils.getLoadProgressColorId(this));
     }
 
     @Subscriber(tag = Constants.EVENT_THEME_CHANGE)
     public void applyTheme(Object o) {
-        setStatausBarColor();
-        setSwiptLyaoutColor();
+        setStatusBarColor();
+        setSwipeLayoutColor();
         setEditColor();
     }
 
@@ -224,10 +228,14 @@ public class CommentActivity extends
         return e.getMessage();
     }
 
+    /**
+     * 创建presenter
+     * @return mPresenter
+     */
     @NonNull
     @Override
     public CommentPresenter createPresenter() {
-        return mPersenter = new CommentPresenterImpl();
+        return mPresenter = new CommentPresenterImpl();
     }
 
     @Override
@@ -253,7 +261,7 @@ public class CommentActivity extends
             return;
         }
         InputModeUtils.closeInputMode(mEditText);
-        mPersenter.sendBookComment(book, reply, t);
+        mPresenter.sendBookComment(book, reply, t);
     }
 
     @Override
@@ -285,11 +293,6 @@ public class CommentActivity extends
     @Override
     public List<BookComment> getData() {
         return mAdapter.getData();
-    }
-
-    @Override
-    public void showMsg(String msg) {
-        showLightError(msg);
     }
 
     @Override

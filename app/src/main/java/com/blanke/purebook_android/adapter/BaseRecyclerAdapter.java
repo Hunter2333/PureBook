@@ -7,7 +7,7 @@ import com.joanzapata.android.recyclerview.QuickAdapter;
 import java.util.List;
 
 
-
+//TODO:
 public abstract class BaseRecyclerAdapter<T> extends QuickAdapter<T> {
 
     public BaseRecyclerAdapter(Context context, int layoutResId) {

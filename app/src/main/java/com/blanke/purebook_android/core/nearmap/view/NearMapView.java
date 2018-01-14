@@ -5,8 +5,6 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 import java.util.List;
 
-/**
- * Created by Blanke on 16-2-26.
- */
+//TODO:
 public interface NearMapView extends MvpLceView<List<User>> {
 }

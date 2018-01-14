@@ -7,6 +7,11 @@ import com.blanke.purebook_android.core.comment.view.CommentView;
 
 import java.util.List;
 
+/**
+ * 评论的Presenter抽象类
+ * 继承封装的BaseRxPresenter
+ * 绑定CommentView
+ */
 public abstract class CommentPresenter extends BaseRxPresenter<CommentView, List<BookComment>> {
 
     abstract public void getBookCommentData(Book book, boolean pullToRefresh, int skip, int limit);

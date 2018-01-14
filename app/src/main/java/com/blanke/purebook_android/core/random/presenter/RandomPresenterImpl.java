@@ -7,6 +7,7 @@ import com.blanke.purebook_android.rx.RxCloudFunction;
 import java.util.HashMap;
 import java.util.List;
 
+//TODO:
 public class RandomPresenterImpl extends RandomPresenter {
     private boolean pullToRefresh;
 

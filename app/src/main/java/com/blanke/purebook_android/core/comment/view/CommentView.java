@@ -6,10 +6,11 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 import java.util.List;
 
 /**
- * Created by Blanke on 16-3-22.
+ * 书籍评论View层接口
+ * 继承Mosby库的MvpLceView
  */
+
 public interface CommentView extends MvpLceView<List<BookComment>> {
-    public void showMsg(String msg);
 
     public void sendSuccess();
 

@@ -3,7 +3,12 @@ package com.blanke.purebook_android.core.column.presenter;
 import com.blanke.purebook_android.bean.BookColumn;
 import com.blanke.purebook_android.rx.RxBookColumn;
 
+/**
+ * ColumnPresenter的实现类
+ * @author chrischen
+ */
 
+//TODO:
 public class ColumnPresenterImpl extends ColumnPresenter {
     private boolean pullToRefresh;
 

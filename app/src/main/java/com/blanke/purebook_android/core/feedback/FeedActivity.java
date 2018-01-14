@@ -62,6 +62,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * 反馈意见activity
+ */
 public class FeedActivity extends BaseSwipeBackActivity {
     FeedbackAgent agent;
     ListView feedbackListView;
@@ -423,21 +426,6 @@ public class FeedActivity extends BaseSwipeBackActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         setTitle(ResUtils.getResString(this, R.string.navigation_feedback));
-//        ActionBar actionBar = this.getActionBar();
-//        if (actionBar != null) {
-//            actionBar.setCustomView(Resources.layout.avoscloud_feedback_thread_actionbar(this));
-//            actionBar.setDisplayShowCustomEnabled(true);
-//            actionBar.setDisplayShowHomeEnabled(false);
-//            actionBar.setDisplayShowTitleEnabled(false);
-////            View backButton = actionBar.getCustomView().findViewById(Resources.id.avoscloud_feedback_actionbar_back(this));
-////            backButton.setOnClickListener(new View.OnClickListener() {
-////                public void onClick(View v) {
-////                    FeedActivity.this.onBackPressed();
-////                    FeedActivity.this.finish();
-////                }
-////            });
-//        }
-
     }
 
     private void smoothScrollToBottom() {

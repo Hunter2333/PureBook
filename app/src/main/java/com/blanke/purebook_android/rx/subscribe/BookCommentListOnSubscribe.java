@@ -8,6 +8,7 @@ import com.blanke.purebook_android.rx.subscribe.base.BaseCloudOnSubscribe;
 
 import java.util.List;
 
+//TODO:
 public class BookCommentListOnSubscribe extends BaseCloudOnSubscribe<List<BookComment>> {
     private Book book;
     private int limit, skip;
@@ -25,7 +26,6 @@ public class BookCommentListOnSubscribe extends BaseCloudOnSubscribe<List<BookCo
                 .whereEqualTo(BookComment.BOOK, book)
                 .limit(limit)
                 .include(BookComment.USER)
-//                .include(BookComment.REPLY)
                 .include(BookComment.REPLY + "." + BookComment.USER+"."+ User.NICKNAME)
                 .skip(skip)
                 .order("-updatedAt"))

@@ -1,4 +1,4 @@
-package com.blanke.purebook_android.core.nearmap.persenter;
+package com.blanke.purebook_android.core.nearmap.presenter;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVGeoPoint;
@@ -9,9 +9,7 @@ import com.blanke.purebook_android.bean.User;
 
 import java.util.List;
 
-/**
- * Created by blanke on 16-4-3.
- */
+//TODO:
 public class NearMapPresenterImpl extends NearMapPresenter {
     @Override
     public void getNearFriend(boolean pullToRefresh, AVGeoPoint location, int size) {

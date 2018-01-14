@@ -19,7 +19,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//TODO:
 public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookViewHolder> {
     private Context context;
     private List<Book> books;

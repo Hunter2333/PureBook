@@ -7,16 +7,8 @@ import com.blanke.purebook_android.rx.subscribe.base.BaseCloudOnSubscribe;
 
 import java.util.List;
 
+//TODO:
 public class MainColumnOnSubscribe extends BaseCloudOnSubscribe<List<BookColumn>> {
-
-
-    public MainColumnOnSubscribe(AVQuery.CachePolicy cachePolicy, long maxCacheAge, long detaly) {
-        super(cachePolicy, maxCacheAge, detaly);
-    }
-
-    public MainColumnOnSubscribe() {
-    }
-
     @Override
     protected List<BookColumn> execute() throws Exception {
         return prepare(BookColumn.getQuery(BookColumn.class)

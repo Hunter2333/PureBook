@@ -6,6 +6,11 @@ import com.blanke.purebook_android.core.column.view.ColumnView;
 
 import java.util.List;
 
+/**
+ * @author chrischen
+ */
+
+//TODO:
 public abstract class ColumnPresenter extends BaseRxPresenter<ColumnView,List<BookColumn>> {
 
     abstract public void getColumnData(BookColumn parentBookColumn,boolean pullToRefresh);

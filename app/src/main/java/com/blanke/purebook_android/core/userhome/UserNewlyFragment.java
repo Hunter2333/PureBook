@@ -35,7 +35,12 @@ import java.util.List;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
+/**
+ *
+ */
 
+
+//TODO:
 @EFragment(R.layout.fragment_userhome_newly)
 public class UserNewlyFragment extends BaseFragment
         implements NeuSwipeRefreshLayout.OnRefreshListener, UserNewlyView {

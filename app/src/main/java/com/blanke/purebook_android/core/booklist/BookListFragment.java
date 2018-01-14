@@ -38,6 +38,12 @@ import java.util.List;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
+/**
+ * 书的榜单Fragment
+ * 继承BaseColumnFragment
+ * 实现书的榜单View层接口
+ * @author chrischen
+ */
 @EFragment(R.layout.fragment_book_item)
 public class BookListFragment extends
         BaseColumnFragment<SwipeRefreshLayout, List<Book>, BookListView, BookListPresenter>

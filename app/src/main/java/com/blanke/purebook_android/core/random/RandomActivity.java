@@ -23,6 +23,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
+//TODO:
 @EActivity(R.layout.fragment_random)
 public class RandomActivity extends BaseMvpLceViewStateActivity<LinearLayout, List<Book>, RandomView, RandomPresenter>
         implements RandomView {

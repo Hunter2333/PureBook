@@ -39,22 +39,21 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
+/**
+ * 登录Activity
+ * 继承封装的BaseActivity基类
+ */
+
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends BaseActivity
         implements PlatformActionListener {
 
-    @ViewById(R.id.contentView)
-    View contentView;
-    @ViewById(R.id.loadingView)
-    MaterialProgressBar loadView;
-    @ViewById(R.id.activity_login_bu_sina)
-    View mSinaBt;
-    @ViewById(R.id.activity_login_bu_qq)
-    View mQQBt;
-    @ViewById(R.id.activity_login_layout_login)
-    View mLoginBtLayout;
-    @ViewById(R.id.activity_login_icon)
-    ImageView mLogoIcon;
+    @ViewById(R.id.contentView) View contentView;
+    @ViewById(R.id.loadingView) MaterialProgressBar loadView;
+    @ViewById(R.id.activity_login_bu_sina) View mSinaBt;
+    @ViewById(R.id.activity_login_bu_qq) View mQQBt;
+    @ViewById(R.id.activity_login_layout_login) View mLoginBtLayout;
+    @ViewById(R.id.activity_login_icon) ImageView mLogoIcon;
 
     private String type;
     private long lessTime = 3000, temp;

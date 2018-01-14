@@ -24,6 +24,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
+//TODO:
 @EFragment(R.layout.fragment_random)
 public class RandomFragment extends BaseColumnFragment<LinearLayout, List<Book>, RandomView, RandomPresenter>
         implements RandomView {

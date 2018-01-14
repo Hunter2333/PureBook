@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import rx.Observable;
 
+//TODO:
 public class RxCloudFunction<T> {
     public Observable<T> executeCloud(String cloudFunctionName, HashMap<String, String> params) {
         return RxUtils.schedulerNewThread(

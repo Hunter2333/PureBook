@@ -15,16 +15,25 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 import com.melnykov.fab.FloatingActionButton;
 import com.socks.library.KLog;
 
-
+/**
+ * Column的Fragment基类
+ * 继承Mosby库的MvpLceFragment
+ * @param <CV>
+ * @param <M>数据
+ * @param <V>View层
+ * @param <P>Presenter层
+ * @author chrischen
+ */
 public abstract class BaseColumnFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
         extends MvpLceFragment<CV, M, V, P> {
 
     public static final String ARG_BOOKCOLUMN = "BaseColumnFragment_BookColumn";
     protected BookColumn mCurrentBookColumn;
-    protected FloatingActionButton fab;
+    protected FloatingActionButton fab;//悬浮按钮
 
     private boolean isVisible = false;
     private boolean isViewCreate = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,6 +9,7 @@ import com.blanke.purebook_android.utils.RxUtils;
 
 import rx.Observable;
 
+//TODO:
 public class RxSNS {
     public static Observable<User> snsLogin(Activity activity, SNSType type, String appid, String appsec, String redirecturl) {
         return RxUtils.schedulerNewThread(

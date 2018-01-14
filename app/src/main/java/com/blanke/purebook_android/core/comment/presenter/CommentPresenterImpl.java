@@ -7,11 +7,21 @@ import com.blanke.purebook_android.bean.BookComment;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.rx.RxBookComment;
 
-
+/**
+ * 评论的presenter实现类
+ * @author chrischen
+ */
 public class CommentPresenterImpl extends CommentPresenter {
 
-    private boolean pullToRefresh;
+    private boolean pullToRefresh;//用户是否下拉更新
 
+    /**
+     * 获取书籍评论
+     * @param book
+     * @param pullToRefresh 用户是否下拉更新
+     * @param skip
+     * @param limit
+     */
     @Override
     public void getBookCommentData(Book book, boolean pullToRefresh, int skip, int limit) {
         this.pullToRefresh = pullToRefresh;
@@ -19,6 +29,13 @@ public class CommentPresenterImpl extends CommentPresenter {
         RxBookComment.getBookCommentListData(
                 book, limit, skip).subscribe(this::onSuccess, this::onFail);
     }
+
+    /**
+     * 添加书籍评论
+     * @param book
+     * @param reply
+     * @param content
+     */
 
     @Override
     public void sendBookComment(Book book, BookComment reply, String content) {
@@ -34,6 +51,10 @@ public class CommentPresenterImpl extends CommentPresenter {
                         , this::onFail);
     }
 
+    /**
+     * 删除书籍评论
+     * @param bookComment
+     */
     @Override
     public void deleteComment(BookComment bookComment) {
         bookComment.deleteInBackground(new DeleteCallback() {

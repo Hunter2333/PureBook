@@ -12,6 +12,7 @@ import com.blanke.purebook_android.manager.ColumnManager;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO:
 public class ColumnFragmentAdapter extends FragmentPagerAdapter {
     List<BookColumn> bookColumns;
     SparseArray<BaseColumnFragment> fragments;

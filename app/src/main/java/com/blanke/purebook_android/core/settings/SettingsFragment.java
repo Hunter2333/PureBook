@@ -9,8 +9,12 @@ import android.preference.PreferenceFragment;
 
 import com.blanke.purebook_android.R;
 
+/**
+ * 设置Fragment
+ * 继承安卓的Preference Fragment
+ * @author chrischen
+ */
 public class SettingsFragment extends PreferenceFragment {
-
 
     private EditTextPreference mEtPreference;
     private ListPreference mListPreference;

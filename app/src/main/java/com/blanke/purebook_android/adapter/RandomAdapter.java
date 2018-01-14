@@ -16,7 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//TODO:
 public class RandomAdapter extends BaseAdapter {
     private Context context;
     private List<Book> books;

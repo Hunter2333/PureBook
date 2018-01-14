@@ -26,6 +26,10 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 扫描识别书籍的Activity
+ */
+//TODO:
 @EActivity(R.layout.activity_scan_code)
 public class CommonScanActivity extends Activity
         implements ScanListener, View.OnClickListener {

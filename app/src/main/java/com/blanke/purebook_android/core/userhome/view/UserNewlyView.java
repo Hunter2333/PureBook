@@ -5,6 +5,11 @@ import com.blanke.purebook_android.bean.UserBookLike;
 
 import java.util.List;
 
+/**
+ *
+ */
+
+//TODO:
 public interface UserNewlyView {
     void setLikeData(List<UserBookLike> data);
 

@@ -9,6 +9,11 @@ import com.blanke.purebook_android.core.userhome.view.UserNewlyView;
 
 import java.util.List;
 
+/**
+ *
+ */
+
+//TODO:
 public class NewlyLikePresenterImpl extends UserNewlyPresenter {
     public NewlyLikePresenterImpl(UserNewlyView view) {
         super(view);

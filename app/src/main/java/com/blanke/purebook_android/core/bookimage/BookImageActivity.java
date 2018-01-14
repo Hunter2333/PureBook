@@ -28,17 +28,21 @@ import org.androidannotations.annotations.ViewById;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+/**
+ * 书的封面activity
+ * @author chrischen
+ */
 @EActivity(R.layout.activity_book_image)
 public class BookImageActivity extends BaseActivity {
     private static final String ARG_NAME_URL = "BookImageActivity_url";
     private static final String ARG_NAME_BOOKNAME = "BookImageActivity_bookname";
     private String url;
-    @ViewById(R.id.activity_img_img)
-    ImageView mImageView;
+    @ViewById(R.id.activity_img_img) ImageView mImageView;
     private Bitmap bitmap;
     private String bookName;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
     public static void start(Activity activity, ImageView imageview, String url, String bookName) {
         Intent intent2 = new Intent(activity, BookImageActivity_.class);
         Bundle bundle = new Bundle();

@@ -12,10 +12,15 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 设置Activity
+ * 继承封装的BaseSwipeBackActivity
+ * @author chrischen
+ */
+
 @EActivity(R.layout.activity_settings)
 public class SettingsActivity extends BaseSwipeBackActivity {
-    @ViewById(R.id.activity_settings_toolbar)
-    Toolbar toolbar;
+    @ViewById(R.id.activity_settings_toolbar) Toolbar toolbar;
 
     @AfterViews
     public void init() {

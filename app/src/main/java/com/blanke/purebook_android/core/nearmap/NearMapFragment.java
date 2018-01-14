@@ -24,8 +24,8 @@ import com.blanke.purebook_android.base.BaseColumnFragment;
 import com.blanke.purebook_android.bean.BookColumn;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.constants.Constants;
-import com.blanke.purebook_android.core.nearmap.persenter.NearMapPresenter;
-import com.blanke.purebook_android.core.nearmap.persenter.NearMapPresenterImpl;
+import com.blanke.purebook_android.core.nearmap.presenter.NearMapPresenter;
+import com.blanke.purebook_android.core.nearmap.presenter.NearMapPresenterImpl;
 import com.blanke.purebook_android.core.nearmap.view.NearMapView;
 import com.blanke.purebook_android.core.userhome.UserHomeActivity;
 import com.blanke.purebook_android.manager.LocalManager;
@@ -40,9 +40,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by blanke on 16-4-3.
- */
+//TODO:
 @EFragment(R.layout.fragment_near_map)
 public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>, NearMapView, NearMapPresenter>
         implements NearMapView, LocationSource {
