@@ -132,9 +132,6 @@ public class AnimUtils {
         anim4.setInterpolator(new OvershootInterpolator(3.0F));
         anim5.setInterpolator(new OvershootInterpolator(3.0F));
         set.start();
-//        ViewPropertyAnimator.animate(v)
-//                .alpha(1F)
-//                .setDuration(Constants.ANIM_DURATION_LONG).start();
     }
 
     public interface CallBack {

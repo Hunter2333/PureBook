@@ -6,6 +6,8 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.avos.avoscloud.AVAnonymousUtils;
@@ -35,7 +37,6 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -49,12 +50,13 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 public class LoginActivity extends BaseActivity
         implements PlatformActionListener {
 
-    @ViewById(R.id.contentView) View contentView;
-    @ViewById(R.id.loadingView) MaterialProgressBar loadView;
-    @ViewById(R.id.activity_login_bu_sina) View mSinaBt;
-    @ViewById(R.id.activity_login_bu_qq) View mQQBt;
-    @ViewById(R.id.activity_login_layout_login) View mLoginBtLayout;
-    @ViewById(R.id.activity_login_icon) ImageView mLogoIcon;
+    @ViewById(R.id.activity_login_logo)ImageView logo;
+    @ViewById(R.id.activity_login_user_name_text)
+    EditText userNameEditText;
+    @ViewById(R.id.activity_login_user_password_text) EditText userPasswordEditText;
+    @ViewById(R.id.activity_login_login_button)
+    Button loginButton;
+    @ViewById(R.id.activity_login_register_button) Button registerButton;
 
     private String type;
     private long lessTime = 3000, temp;
@@ -65,23 +67,22 @@ public class LoginActivity extends BaseActivity
         temp = SystemClock.currentThreadTimeMillis();
         SoleApplication.getApplication(this).init();
         temp = SystemClock.currentThreadTimeMillis() - temp;
-        loadView.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
-        mQQBt.postDelayed(() -> exexuteLogin(),
+        loginButton.postDelayed(() -> executeLogin(),
                 temp > lessTime ? 0 : lessTime - temp);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Drawable drawable = mLogoIcon.getDrawable();
+        /*Drawable drawable = mLogoIcon.getDrawable();
         if (drawable instanceof Animatable) {
             ((Animatable) drawable).start();
-        }
+        }*/
     }
 
-    private void exexuteLogin() {
+    private void executeLogin() {
         if (isLogin()) {
-            jumpMain();
+            jumpMain();//如果已经登录则跳转首页
         } else {
             AnimUtils.loginShow(mSinaBt);
             AnimUtils.loginShow(mQQBt);
@@ -92,17 +93,14 @@ public class LoginActivity extends BaseActivity
         return User.getCurrentUser() != null;
     }
 
-    @Click(R.id.activity_login_bu_sina)
-    void loginSina() {
-        loading(true);
-        type = AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO;
-        Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
-        weibo.SSOSetting(false);  //设置false表示使用SSO授权方式
-        weibo.setPlatformActionListener(this); // 设置分享事件回调
-        weibo.authorize();
+    @Click(R.id.activity_login_login_button)
+    void login(){
+
     }
 
-    @Click(R.id.activity_login_bu_qq)
+    @Click(R.id.activity_login_register_button)
+
+
     void loginQQ() {
         loading(true);
         type = AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO;
@@ -112,15 +110,6 @@ public class LoginActivity extends BaseActivity
         qq.authorize();
     }
 
-    @Click(R.id.activity_login_bu_anonymous)
-    void anonymous() {
-        AVAnonymousUtils.logIn(new LogInCallback<AVUser>() {
-            @Override
-            public void done(AVUser user, AVException e) {
-                jumpMain();
-            }
-        });
-    }
 
     private void loading(boolean isshow) {
         contentView.setVisibility(isshow ? View.GONE : View.VISIBLE);
@@ -136,6 +125,9 @@ public class LoginActivity extends BaseActivity
         jumpMain();
     }
 
+    /**
+     * 跳转首页
+     */
     private void jumpMain() {
         MainActivity_.intent(this).start();
         this.finish();

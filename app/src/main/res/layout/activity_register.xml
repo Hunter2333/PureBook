@@ -5,35 +5,43 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/activity_login_logo"
+        android:id="@+id/activity_register_logo"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
+        android:layout_height="62dp"
         app:srcCompat="@drawable/activity_login_icon" />
 
     <EditText
-        android:id="@+id/activity_login_user_name_text"
+        android:id="@+id/activity_register_user_name_text"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="57dp"
         android:ems="10"
         android:hint="用户名"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/activity_login_user_password_text"
+        android:id="@+id/activity_register_user_password_text"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="64dp"
         android:ems="10"
         android:hint="密码"
         android:inputType="textPassword" />
 
+    <EditText
+        android:id="@+id/activity_register_confirm_user_password_text"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:ems="10"
+        android:hint="确认密码"
+        android:inputType="textPassword" />
+
     <Button
-        android:id="@+id/activity_login_login_button"
+        android:id="@+id/activity_register_login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登录" />
 
     <Button
-        android:id="@+id/activity_login_register_button"
+        android:id="@+id/activity_register_register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="注册" />
