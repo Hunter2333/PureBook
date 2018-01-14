@@ -16,13 +16,21 @@ public class Constants {
 
     public static final String APPID_AVOS = "l8eot9jDXBhCt40q1BPJqH9a-gzGzoHsz";
     public static final String APPKEY_AVOS = "fAYpLpd3IBwlaiixg0bM20Rm";
+    public static final String APPID_SINA = "1550326405";
+    public static final String APPID_QQ = "1105114711";
+    public static final String APPSEC_QQ = "uI7mVrh73fpKMuua";
+    public static final String APPSEC_SINA = "8d766414552a564a15bc4db2bbacc437";
+    public static final String REDIRECTURL_SINA = "https://leancloud.cn/1.1/sns/callback/1k4u78lawq2pvrjr";
+    public static final String REDIRECTURL_QQ = "https://leancloud.cn/1.1/sns/callback/lljmk2jy0vqme5vh";
     public static final String CLOUD_FUNCTION_SEARCH_BOOK = "cloud_search_book";
     public static final String CLOUD_FUNCTION_RANDOM_BOOK = "cloud_random_book";
+    public static final String APPKEY_UM = "5700f53f67e58e999c0026a0";
 
     public static final long DELAY_NETWORK = 500;
     public static final int CLOUD_MAIN_COLUMN_MAX_ORDER = 10;
     public static final long DAY_AGE = 24 * 60 * 60 * 1000;
     public static final int PAGE_COUNT = 20;
+    public static final long ANIM_DURATION_LONG = 900;
     public static final long ANIM_DURATION_MIND = 400;
     public static final long ANIM_DURATION_SHORT = 200;
     private static DisplayImageOptions options;
