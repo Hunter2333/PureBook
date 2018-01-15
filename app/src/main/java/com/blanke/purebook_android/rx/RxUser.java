@@ -1,6 +1,5 @@
 package com.blanke.purebook_android.rx;
 import com.blanke.purebook_android.bean.UserBean;
-import com.blanke.purebook_android.rx.subscribe.AVUserLoginOnSubscribe;
 import com.blanke.purebook_android.rx.subscribe.UserLoginOnSubscribe;
 import com.blanke.purebook_android.utils.RxUtils;
 

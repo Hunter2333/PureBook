@@ -10,17 +10,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *
  */
 public class RetrofitClient {
-    private static Retrofit retrofit = null;
+    private static Retrofit retrofit;
 
-    public static Retrofit getClient(){
-        if (retrofit==null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.REQUEST_HTTP_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//新的配置
-                    .build();
-        }
-        return retrofit;
+    public static ApiService getService(){
+        retrofit=new Retrofit.Builder()
+                .baseUrl(Constants.REQUEST_HTTP_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();//增加返回值为实体类的支持
+        //创建service
+        return retrofit.create(ApiService.class);
     }
 
 }

@@ -18,12 +18,12 @@ public class UserRegisterOnSubscribe implements Observable.OnSubscribe<UserBean>
 
     @Override
     public void call(Subscriber<? super UserBean> subscriber) {
-        try {
+        /**try {
             user.signUp();
             subscriber.onNext(user);
         } catch (Exception e) {
             e.printStackTrace();
             subscriber.onError(e);
-        }
+        }**/
     }
 }

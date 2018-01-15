@@ -1,5 +1,7 @@
 package com.blanke.purebook_android.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Timestamp;
 
 /**
@@ -8,13 +10,33 @@ import java.sql.Timestamp;
  */
 
 public class UserBean {
+
+    @SerializedName("UserName")
     private String userName;
+    @SerializedName("UserId")
     private int userID;
+    @SerializedName("UserKey")
     private String userKey;
+    @SerializedName("Phone")
     private String phone;
+    @SerializedName("Portrait")
     private String portrait;
+    @SerializedName("Created")
     private Timestamp created;
+    @SerializedName("Desc")
     private String desc;//用户签名
+
+
+
+
+
+
+
+
+
+
+
+
 
     public String getUserName() {
         return userName;

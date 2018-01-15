@@ -22,11 +22,11 @@ public class UserLoginOnSubscribe implements Observable.OnSubscribe<UserBean> {
 
     @Override
     public void call(Subscriber<? super UserBean> subscriber) {
-        try {
+        /**try {
             subscriber.onNext(UserBean.login(name, key));
         } catch (Exception e) {
             e.printStackTrace();
             subscriber.onError(e);
-        }
+        }*/
     }
 }

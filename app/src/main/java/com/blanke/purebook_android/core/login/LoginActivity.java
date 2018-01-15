@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.blanke.purebook_android.R;
 import com.blanke.purebook_android.app.SoleApplication;
 import com.blanke.purebook_android.base.BaseActivity;
 import com.blanke.purebook_android.bean.User;
+import com.blanke.purebook_android.bean.UserBean;
 import com.blanke.purebook_android.core.main.MainActivity_;
 import com.blanke.purebook_android.core.register.RegisterActivity;
 import com.blanke.purebook_android.core.register.RegisterActivity_;
@@ -23,6 +25,8 @@ import com.blanke.purebook_android.utils.AnimUtils;
 import com.blanke.purebook_android.utils.ResUtils;
 import com.blanke.purebook_android.utils.SnackUtils;
 import com.blanke.purebook_android.utils.StatusBarCompat;
+import com.blanke.purebook_android.web.ApiService;
+import com.blanke.purebook_android.web.RetrofitClient;
 import com.socks.library.KLog;
 
 import org.androidannotations.annotations.AfterViews;
@@ -33,6 +37,9 @@ import org.androidannotations.annotations.ViewById;
 import java.util.HashMap;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * 登录Activity
@@ -52,6 +59,8 @@ public class LoginActivity extends BaseActivity {
     private String type;
     private long lessTime = 3000, temp;
 
+    private ApiService service = RetrofitClient.getService();
+
     @AfterViews
     public void init() {
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorAccent));
@@ -66,10 +75,36 @@ public class LoginActivity extends BaseActivity {
 
     @Click(R.id.activity_login_login_button)
     public void login(){
-        String userName = userNameEditText.getText().toString();
+        String userIdString = userNameEditText.getText().toString();
         String password =  userPasswordEditText.getText().toString();
-        //TODO:是否匹配,如果匹配那么
-        jumpMain();
+
+        if(userNameEditText.getText().toString().isEmpty()||password.isEmpty()){
+            Toast.makeText(LoginActivity.this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
+        }else{
+            int userId = Integer.parseInt(userIdString);
+            //TODO:是否匹配,如果匹配那么
+            service.login(userId,password).subscribeOn(Schedulers.newThread())//请求新的线程执行
+                    .observeOn(Schedulers.io())//请求完成在io线程执行
+                    .observeOn(AndroidSchedulers.mainThread())//最后在主线程执行
+                    .subscribe(new Subscriber<UserBean>() {
+                        @Override
+                        public void onCompleted() {
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Toast.makeText(LoginActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                        }//请求失败
+
+                        @Override
+                        public void onNext(UserBean userBean) {
+                            //请求成功跳转首页
+                            jumpMain();
+                        }
+                    });
+
+
+        }
 
     }
 
