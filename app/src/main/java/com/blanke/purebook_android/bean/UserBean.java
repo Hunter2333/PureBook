@@ -70,6 +70,11 @@ public class UserBean {
         this.desc = desc;
     }
 
+    public void login(String name,String key){
+
+
+    }
+
 
 
 }
