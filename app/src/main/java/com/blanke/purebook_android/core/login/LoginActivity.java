@@ -93,14 +93,12 @@ public class LoginActivity extends BaseActivity {
         this.finish();
     }
 
-
     /**
      * 跳转注册
      */
     private void jumpRegister(){
         RegisterActivity_.intent(this).start();
         this.finish();
-
     }
 
 

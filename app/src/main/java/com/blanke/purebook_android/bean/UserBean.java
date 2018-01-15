@@ -53,9 +53,11 @@ public class UserBean {
     public void setPortrait(String portrait) {
         this.portrait = portrait;
     }
+
     public Timestamp getCreated() {
         return created;
     }
+
     public void setCreated(Timestamp created) {
         this.created = created;
     }
@@ -67,5 +69,7 @@ public class UserBean {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+
 
 }

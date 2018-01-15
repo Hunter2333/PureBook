@@ -4,14 +4,13 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * Rxjava工具类
+ */
 public class RxUtils {
     public static Observable schedulerNewThread(Observable observable) {
         return observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());//subscriber回调发生在主线程
     }
 
-    public static Observable schedulerIO(Observable observable) {
-        return observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
 }

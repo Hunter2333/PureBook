@@ -79,4 +79,5 @@ public class User extends AVUser {
     public String getDistrict() {
         return getString(DISTRICT);
     }
+
 }
