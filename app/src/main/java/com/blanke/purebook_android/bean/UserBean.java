@@ -2,6 +2,7 @@ package com.blanke.purebook_android.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -9,11 +10,11 @@ import java.sql.Timestamp;
  * @author chrischen
  */
 
-public class UserBean {
+public class UserBean implements Serializable{
 
     @SerializedName("UserName")
     private String userName;
-    @SerializedName("UserId")
+    @SerializedName("UserID")
     private int userID;
     @SerializedName("UserKey")
     private String userKey;
@@ -22,21 +23,9 @@ public class UserBean {
     @SerializedName("Portrait")
     private String portrait;
     @SerializedName("Created")
-    private Timestamp created;
+    private Long created;
     @SerializedName("Desc")
     private String desc;//用户签名
-
-
-
-
-
-
-
-
-
-
-
-
 
     public String getUserName() {
         return userName;
@@ -76,11 +65,11 @@ public class UserBean {
         this.portrait = portrait;
     }
 
-    public Timestamp getCreated() {
+    public Long getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 

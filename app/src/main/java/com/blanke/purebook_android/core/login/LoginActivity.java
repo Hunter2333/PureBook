@@ -7,6 +7,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.blanke.purebook_android.app.SoleApplication;
 import com.blanke.purebook_android.base.BaseActivity;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.bean.UserBean;
+import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.core.main.MainActivity_;
 import com.blanke.purebook_android.core.register.RegisterActivity;
 import com.blanke.purebook_android.core.register.RegisterActivity_;
@@ -26,19 +28,30 @@ import com.blanke.purebook_android.utils.ResUtils;
 import com.blanke.purebook_android.utils.SnackUtils;
 import com.blanke.purebook_android.utils.StatusBarCompat;
 import com.blanke.purebook_android.web.ApiService;
+import com.blanke.purebook_android.web.BaseResponse;
 import com.blanke.purebook_android.web.RetrofitClient;
-import com.socks.library.KLog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.ResponseBody;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -55,11 +68,9 @@ public class LoginActivity extends BaseActivity {
     @ViewById(R.id.activity_login_user_password_text) EditText userPasswordEditText;
     @ViewById(R.id.activity_login_login_button) Button loginButton;
     @ViewById(R.id.activity_login_register_button) Button registerButton;
-
+    
     private String type;
     private long lessTime = 3000, temp;
-
-    private ApiService service = RetrofitClient.getService();
 
     @AfterViews
     public void init() {
@@ -83,26 +94,44 @@ public class LoginActivity extends BaseActivity {
         }else{
             int userId = Integer.parseInt(userIdString);
             //TODO:是否匹配,如果匹配那么
-            service.login(userId,password).subscribeOn(Schedulers.newThread())//请求新的线程执行
-                    .observeOn(Schedulers.io())//请求完成在io线程执行
-                    .observeOn(AndroidSchedulers.mainThread())//最后在主线程执行
-                    .subscribe(new Subscriber<UserBean>() {
-                        @Override
-                        public void onCompleted() {
-                        }
+            /**RetrofitClient.getInstance().login(new Subscriber<BaseResponse<UserBean>>() {
+                @Override
+                public void onCompleted() {
 
-                        @Override
-                        public void onError(Throwable e) {
-                            Toast.makeText(LoginActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
-                        }//请求失败
+                }
 
-                        @Override
-                        public void onNext(UserBean userBean) {
-                            //请求成功跳转首页
-                            jumpMain();
-                        }
-                    });
+                @Override
+                public void onError(Throwable e) {
+                    Toast.makeText(LoginActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                }
 
+                @Override
+                public void onNext(BaseResponse<UserBean> userBeanBaseResponse) {
+                    Toast.makeText(LoginActivity.this, userBeanBaseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            },userId,password);**/
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.REQUEST_HTTP_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<BaseResponse<UserBean>> call = apiService.login(userId,password);
+            call.enqueue(new Callback<BaseResponse<UserBean>>() {
+                @Override
+                public void onResponse(Call<BaseResponse<UserBean>> call, Response<BaseResponse<UserBean>> response) {
+                    if(response.body().getMsg().toString().equals("成功！")){
+                        Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                        jumpMain();//跳转首页
+                    }else if(response.body().getMsg().toString().equals("没有登录")){
+                        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<BaseResponse<UserBean>> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
 
@@ -114,10 +143,6 @@ public class LoginActivity extends BaseActivity {
     @Click(R.id.activity_login_register_button)
     public void register(){
         jumpRegister();
-    }
-
-    private void onNext(User user) {
-        jumpMain();
     }
 
     /**
