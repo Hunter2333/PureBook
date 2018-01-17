@@ -1,7 +1,11 @@
 package com.blanke.purebook_android.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVObject;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -11,74 +15,130 @@ import java.util.List;
  */
 
 @AVClassName("Book")
-public class Book extends AVObject {
-    public static final String TABLE_NAME = "Book";
-    public static final String TITLE = "title";
-    public static final String IMG_L = "img_l";
-    public static final String IMG_M = "img_m";
-    public static final String INTRO_CONTENT = "intro_content";
-    public static final String INTRO_AUTHOR = "intro_author";
-    public static final String TAGS = "tags";
-    public static final String DIR = "dir";
-    public static final String PAGES = "pages";
-    public static final String AUTHOR = "author";
-    public static final String BINDING = "binding";
-    public static final String ISBN = "isbn";
-    public static final String PRICE = "price";
-    public static final String PUBLISHER = "publisher";
-    public static final String PUBDATE = "pubdate";
+public class  Book extends AVObject implements Parcelable{
 
-    public String getTitle() {
-        return getString(TITLE);
+
+
+    private String BookName;
+    private int BookID;
+    private String Author;
+    private String AuthorIntro;
+    private String Price;
+    private String Intro;
+    private String Cover;
+    private String Publisher;
+    @SerializedName("ISBN")
+    private String ISBNX;
+
+    public String getBookName() {
+        return BookName;
     }
 
-    public List<String> getTags() {
-        return getList(TAGS);
+    public void setBookName(String BookName) {
+        this.BookName = BookName;
     }
 
-    public String getImgL() {
-        return getString(IMG_L);
+    public int getBookID() {
+        return BookID;
     }
 
-    public String getImgM() {return getString(IMG_M);}
-
-    public String getIntroContent() {
-        return getString(INTRO_CONTENT);
-    }
-
-    public String getIntroAuthor() {
-        return getString(INTRO_AUTHOR);
-    }
-
-    public String getDir() {
-        return getString(DIR);
-    }
-
-    public String getPages() {
-        return getString(PAGES);
+    public void setBookID(int BookID) {
+        this.BookID = BookID;
     }
 
     public String getAuthor() {
-        return getString(AUTHOR);
+        return Author;
     }
 
-    public String getBinding() {
-        return getString(BINDING);
+    public void setAuthor(String Author) {
+        this.Author = Author;
     }
 
-    public String getIsbn() {
-        return getString(ISBN);
+    public String getAuthorIntro() {
+        return AuthorIntro;
+    }
+
+    public void setAuthorIntro(String AuthorIntro) {
+        this.AuthorIntro = AuthorIntro;
     }
 
     public String getPrice() {
-        return getString(PRICE);
+        return Price;
+    }
+
+    public void setPrice(String Price) {
+        this.Price = Price;
+    }
+
+    public String getIntro() {
+        return Intro;
+    }
+
+    public void setIntro(String Intro) {
+        this.Intro = Intro;
+    }
+
+    public String getCover() {
+        return Cover;
+    }
+
+    public void setCover(String Cover) {
+        this.Cover = Cover;
     }
 
     public String getPublisher() {
-        return getString(PUBLISHER);
+        return Publisher;
     }
 
-    public String getPubdate() {
-        return getString(PUBDATE);
+    public void setPublisher(String Publisher) {
+        this.Publisher = Publisher;
+    }
+
+    public String getISBNX() {
+        return ISBNX;
+    }
+
+    public void setISBNX(String ISBNX) {
+        this.ISBNX = ISBNX;
+    }
+
+    public static final Parcelable.Creator<Book> CREATOR = new Creator<Book>() {
+
+        @Override
+        public Book createFromParcel(Parcel source) {
+            Book Book = new Book();
+            Book.setBookName(source.readString());
+            Book.setBookID(source.readInt());
+            Book.setAuthor(source.readString());
+            Book.setAuthorIntro(source.readString());
+            Book.setPrice(source.readString());
+            Book.setIntro(source.readString());
+            Book.setCover(source.readString());
+            Book.setPublisher(source.readString());
+            Book.setISBNX(source.readString());
+            return Book;
+        }
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+      public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(BookName);
+        dest.writeInt(BookID);
+        dest.writeString(Author);
+        dest.writeString(AuthorIntro);
+        dest.writeString(Price);
+        dest.writeString(Intro);
+        dest.writeString(Cover);
+        dest.writeString(Publisher);
+        dest.writeString(ISBNX);
     }
 }

@@ -1,5 +1,6 @@
 package com.blanke.purebook_android.core.booklist;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +19,9 @@ import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.core.booklist.presenter.BookListPresenter;
 import com.blanke.purebook_android.core.booklist.presenter.BookListPresenterImpl;
 import com.blanke.purebook_android.core.booklist.view.BookListView;
+import com.blanke.purebook_android.core.details.DetailsActivity;
 import com.blanke.purebook_android.core.details.DetailsActivity_;
+import com.blanke.purebook_android.core.main.MainActivity_;
 import com.blanke.purebook_android.utils.SkinUtils;
 import com.blanke.purebook_android.utils.SnackUtils;
 import com.neu.refresh.NeuSwipeRefreshLayout;
@@ -115,7 +118,7 @@ public class BookListFragment extends
                 Book book = mAdapter.getBooks().get(position);
                 DetailsActivity_.start(getActivity(),
                         (ImageView) view.findViewById(R.id.item_book_image), book);
-            }
+                }
         });
         mRecyclerView.setItemAnimator(new SlideInUpAnimator());
         SkinManager.getInstance().notifyChangedListeners();

@@ -101,7 +101,9 @@
         <activity android:name="com.blanke.purebook_android.core.bookimage.BookImageActivity_" />
         <activity
             android:name="com.blanke.purebook_android.core.userhome.UserHomeActivity_"
-            android:theme="@style/SwipeBackTheme" />
+            android:theme="@style/SwipeBackTheme">
+
+        </activity>
 
         <service android:name="com.amap.api.location.APSService" />
 

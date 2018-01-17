@@ -70,9 +70,9 @@ public class RandomAdapter extends BaseAdapter {
         TextView textViewTitle = ViewHolderHelper.get(convertView, R.id.item_random_title);
         TextView textViewInfo = ViewHolderHelper.get(convertView, R.id.item_random_info);
         Book item = books.get(position);
-        textViewTitle.setText(item.getTitle());
-        textViewInfo.setText(item.getIntroContent());
-        ImageLoader.getInstance().displayImage(item.getImgL(), imageView, Constants.getImageOptions());
+        textViewTitle.setText(item.getBookName());
+        textViewInfo.setText(item.getIntro());
+        ImageLoader.getInstance().displayImage(item.getCover(), imageView, Constants.getImageOptions());
         return convertView;
     }
 }
