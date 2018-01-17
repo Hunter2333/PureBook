@@ -27,7 +27,9 @@ public class Constants {
     public static final String CLOUD_FUNCTION_RANDOM_BOOK = "cloud_random_book";
     public static final String APPKEY_UM = "5700f53f67e58e999c0026a0";
 
+
     public static final long DELAY_NETWORK = 500;
+    public static int USER_ID = 0;
     public static final int CLOUD_MAIN_COLUMN_MAX_ORDER = 10;
     public static final long DAY_AGE = 24 * 60 * 60 * 1000;
     public static final int PAGE_COUNT = 20;

@@ -28,6 +28,7 @@ import com.avos.avoscloud.AVUser;
 import com.blanke.purebook_android.R;
 import com.blanke.purebook_android.base.BaseSwipeBackActivity;
 import com.blanke.purebook_android.bean.User;
+import com.blanke.purebook_android.bean.UserBean;
 import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.utils.BitmapUtils;
 import com.blanke.purebook_android.utils.StatusBarCompat;
@@ -60,23 +61,25 @@ public class UserHomeActivity extends BaseSwipeBackActivity {
     @ViewById(R.id.activity_userhome_icon) ImageView mIcon;
     @ViewById(R.id.activity_userhome_location) TextView mTextLocation;
     @ViewById(R.id.activity_userhome_head) LinearLayout mLayoutHead;
+
+    //导航控件
     @ViewById(R.id.activity_userhome_tablayout) TabLayout mTabLayout;
     @ViewById(R.id.activity_userhome_viewpager) ViewPager mViewPager;
 
     @StringRes(R.string.title_newly_like) String titleLike;
     @StringRes(R.string.title_newly_comment) String titleComment;
-    private String[] titls;
+    private String[] titles;
 
-    private AVUser user;
+    private UserBean user;
     private double h;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 
-    public static void start(Activity activity, ImageView imageview, User user) {
+    public static void start(Activity activity, ImageView imageview, UserBean user) {
+        //页面传递user object
         Intent intent2 = new Intent(activity, UserHomeActivity_.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(ARG_NAME_BEAN, user);
-        intent2.putExtras(bundle);
+        intent2.putExtra("AccountUserObject",user);
+
         if (imageview != null) {
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                     imageview, activity.getResources().getString(R.string.share_img3));
@@ -90,16 +93,16 @@ public class UserHomeActivity extends BaseSwipeBackActivity {
     void init() {
         SkinManager.getInstance().register(this);
         StatusBarCompat.translucentStatusBar(this);
-        Bundle bundle = getIntent().getExtras();
-        user = bundle.getParcelable(ARG_NAME_BEAN);
+        user = (UserBean) getIntent().getSerializableExtra("AccountUserObject");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mCollapsingToolbarLayout.setTitle(User.getNickname(user));
+        mCollapsingToolbarLayout.setTitle(user.getUserName());
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.Toolbar_expanded_text);//展开后的字体大小等
-        mTextLocation.setText(User.getCity(user));
-        ImageLoader.getInstance().displayImage(User.getIconurl(user), mIcon,
+        //TODO
+        mTextLocation.setText("");
+        ImageLoader.getInstance().displayImage(user.getPortrait(), mIcon,
                 Constants.getImageOptions(), new SimpleImageLoadingListener() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
@@ -118,19 +121,21 @@ public class UserHomeActivity extends BaseSwipeBackActivity {
                 mIcon.setAlpha(a);
             }
         });
-        titls = new String[]{titleLike, titleComment};
+        titles = new String[]{titleLike, titleComment};
+        //设置导航标题
         mTabLayout.addTab(mTabLayout.newTab().setText(titleLike));
         mTabLayout.addTab(mTabLayout.newTab().setText(titleComment));
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return UserNewlyFragment.newInstance(position, user.getObjectId());
+                //TODO:
+                return UserNewlyFragment.newInstance(position, user);
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                return titls[position];
+                return titles[position];
             }
 
             @Override

@@ -18,6 +18,7 @@ import com.blanke.purebook_android.bean.Book;
 import com.blanke.purebook_android.bean.BookComment;
 import com.blanke.purebook_android.bean.CommentMenuItem;
 import com.blanke.purebook_android.bean.User;
+import com.blanke.purebook_android.bean.UserBean;
 import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.core.comment.presenter.CommentPresenter;
 import com.blanke.purebook_android.core.comment.presenter.CommentPresenterImpl;
@@ -80,7 +81,9 @@ public class CommentActivity extends
     private int PAGE_COUNT = Constants.PAGE_COUNT;
     private BaseRecyclerAdapter<BookComment> mAdapter;
     private BookComment reply;
+    //TODO:
     private User mUser;
+    private UserBean user;
 
     @AfterViews
     void init() {
@@ -112,7 +115,8 @@ public class CommentActivity extends
                 }
                 ImageView icon = helper.getImageView(R.id.item_comment_icon);
                 ImageLoader.getInstance().displayImage(user.getIconurl(), icon, Constants.getImageOptions());
-                icon.setOnClickListener(v -> UserHomeActivity.start(CommentActivity.this, icon, user));
+                //TODO:
+                //icon.setOnClickListener(v -> UserHomeActivity.start(CommentActivity.this, icon, user));
                 SkinManager.getInstance().injectSkin(tv.getRootView());//item apply theme
             }
         };

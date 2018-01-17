@@ -23,7 +23,7 @@ public class UserBean implements Serializable{
     @SerializedName("Portrait")
     private String portrait;
     @SerializedName("Created")
-    private Long created;
+    private long created;
     @SerializedName("Desc")
     private String desc;//用户签名
 
@@ -65,11 +65,11 @@ public class UserBean implements Serializable{
         this.portrait = portrait;
     }
 
-    public Long getCreated() {
+    public long getCreated() {
         return created;
     }
 
-    public void setCreated(Long created) {
+    public void setCreated(long created) {
         this.created = created;
     }
 
@@ -80,12 +80,6 @@ public class UserBean implements Serializable{
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
-    public void login(String name,String key){
-
-
-    }
-
 
 
 }

@@ -34,6 +34,7 @@ import com.blanke.purebook_android.R;
 import com.blanke.purebook_android.base.BaseMvpLceViewStateActivity;
 import com.blanke.purebook_android.bean.BookColumn;
 import com.blanke.purebook_android.bean.User;
+import com.blanke.purebook_android.bean.UserBean;
 import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.core.column.ColumnFragment;
 import com.blanke.purebook_android.core.feedback.FeedActivity;
@@ -114,7 +115,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
 
     private List<BookColumn> bookColumns;
 
-    private User currentUser;//当前用户
+    private UserBean currentUser;//当前用户
     private int mSelectPostion = -1;
     private Fragment mSelectFragment;
     private ActionBarDrawerToggle toggle;
@@ -203,7 +204,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
      * 初始化侧滑栏
      */
     private void initNavigationMenu() {
-        currentUser = User.getCurrentUser(User.class);
+        currentUser = (UserBean) getIntent().getSerializableExtra("UserObject");
         Menu menu = navigationView.getMenu();//获取menu实例
 
         int random = (int) (Math.random() * 9 + 1);//获取0到10的随机数
@@ -232,7 +233,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         }
         menu.setGroupCheckable(0, true, true);//single
 
-        if (currentUser != null && !currentUser.isAnonymous()) {
+        if (currentUser != null) {
             navigationView.postDelayed(() -> {
                 mTvNickName = (TextView) navigationView.findViewById(R.id.nav_nickname);
                 mImageIcon = (ImageView) navigationView.findViewById(R.id.nav_icon);
@@ -247,9 +248,9 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
                         .contentColor(SkinUtils.getTextHeightColor())
                         .titleColor(SkinUtils.getTextHeightColor())
                         .onPositive((dialog, which) -> logout()).show());
-                String nick = currentUser.getNickname();
+                String nick = currentUser.getUserName();
                 mTvNickName.setText(nick == null ? "" : nick);
-                ImageLoader.getInstance().displayImage(currentUser.getIconurl(), mImageIcon, Constants.getImageOptions(), new SimpleImageLoadingListener() {
+                ImageLoader.getInstance().displayImage(currentUser.getPortrait(), mImageIcon, Constants.getImageOptions(), new SimpleImageLoadingListener() {
                     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
@@ -265,7 +266,6 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
 
     //退出登录
     private void logout() {
-        User.logOut();
         LoginActivity_.intent(this).start();
         finish();
     }
@@ -351,8 +351,8 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         navigationView.setItemTextColor(colorList);
     }
 
-    private void initLocation() {
-        if (currentUser == null || currentUser.isAnonymous()) {
+    /*private void initLocation() {
+        if (currentUser == null) {
             return;
         }
         localManager = new LocalManager(this);
@@ -373,7 +373,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
 
             }
         });
-    }
+    }*/
 
     //设置页面主题
     @Subscriber(tag = Constants.EVENT_THEME_CHANGE)
@@ -411,7 +411,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         initNavigationMenu();
         replaceFragment(0);
         initCloud();
-        initLocation();
+        //initLocation();
     }
 
     @Override

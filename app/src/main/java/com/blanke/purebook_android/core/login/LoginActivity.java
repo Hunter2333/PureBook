@@ -20,6 +20,7 @@ import com.blanke.purebook_android.base.BaseActivity;
 import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.bean.UserBean;
 import com.blanke.purebook_android.constants.Constants;
+import com.blanke.purebook_android.core.main.MainActivity;
 import com.blanke.purebook_android.core.main.MainActivity_;
 import com.blanke.purebook_android.core.register.RegisterActivity;
 import com.blanke.purebook_android.core.register.RegisterActivity_;
@@ -68,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     @ViewById(R.id.activity_login_user_password_text) EditText userPasswordEditText;
     @ViewById(R.id.activity_login_login_button) Button loginButton;
     @ViewById(R.id.activity_login_register_button) Button registerButton;
-    
+
     private String type;
     private long lessTime = 3000, temp;
 
@@ -121,7 +122,7 @@ public class LoginActivity extends BaseActivity {
                 public void onResponse(Call<BaseResponse<UserBean>> call, Response<BaseResponse<UserBean>> response) {
                     if(response.body().getMsg().toString().equals("成功！")){
                         Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-                        jumpMain();//跳转首页
+                        jumpMain(response);//跳转首页
                     }else if(response.body().getMsg().toString().equals("没有登录")){
                         Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                     }
@@ -147,9 +148,21 @@ public class LoginActivity extends BaseActivity {
 
     /**
      * 跳转首页
+     * 传递user object
      */
-    private void jumpMain() {
-        MainActivity_.intent(this).start();
+    private void jumpMain(Response<BaseResponse<UserBean>> response) {
+        UserBean user=new UserBean();
+        user.setUserID(response.body().getData().getUserID());
+        user.setUserName(response.body().getData().getUserName().toString());
+        user.setUserKey(response.body().getData().getUserKey().toString());
+        user.setCreated(response.body().getData().getCreated());
+        user.setDesc(response.body().getData().getDesc().toString());
+        user.setPhone(response.body().getData().getPhone());
+        user.setPortrait(response.body().getData().getPortrait().toString());
+
+        Intent intent = MainActivity_.intent(this).get();
+        intent.putExtra("UserObject",user);
+        startActivity(intent);
         this.finish();
     }
 

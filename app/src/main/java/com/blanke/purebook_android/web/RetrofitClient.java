@@ -42,13 +42,7 @@ public class RetrofitClient {
         return mInstance;
     }
 
-    /**public void login(Subscriber<BaseResponse<UserBean>> subscriber,int id,String key){
-        mApiService.login(id,key)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }**/
+
 
 
 

@@ -194,7 +194,8 @@ public class NearMapFragment extends BaseColumnFragment<LinearLayout, List<User>
             public boolean onMarkerClick(Marker marker) {
                 LatLng l = marker.getPosition();
                 User u = data.get(latLngs.indexOf(l));
-                UserHomeActivity.start(getActivity(), null, u);
+                //TODO:
+                //UserHomeActivity.start(getActivity(), null, u);
                 return false;
             }
         });
