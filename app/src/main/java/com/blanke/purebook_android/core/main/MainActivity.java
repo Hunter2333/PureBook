@@ -184,7 +184,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
             }
             trans.commit();
             mSelectFragment = fragments[position];
-            mSelectFragment.setArguments(bundle);
+            //mSelectFragment.setArguments(bundle);
         }
     }
 
