@@ -26,5 +26,4 @@ public class RxBookComment {
                 Observable.create(new BookCommentSendOnSubscribe(book,reply, user, comment))
         );
     }
-
 }

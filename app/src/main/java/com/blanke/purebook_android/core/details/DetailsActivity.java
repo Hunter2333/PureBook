@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.blanke.purebook_android.R;
 import com.blanke.purebook_android.base.BaseSwipeBackActivity;
 import com.blanke.purebook_android.bean.Book;
+import com.blanke.purebook_android.bean.User;
 import com.blanke.purebook_android.constants.Constants;
 import com.blanke.purebook_android.core.bookimage.BookImageActivity_;
 import com.blanke.purebook_android.core.comment.CommentActivity_;
@@ -127,18 +128,19 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
             activity.startActivity(intent2);
         }
     }
-
     @AfterViews
     void init() {
-        Bundle bundle = getIntent().getExtras();
-        book = bundle.getParcelable(ARG_NAME_BEAN);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        book = (Book) bundle.getParcelable(ARG_NAME_BEAN);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SkinManager.getInstance().register(this);
         EventBus.getDefault().register(this);
         StatusBarCompat.translucentStatusBar(this);
         applyTheme(null);
-        mCollapsingToolbarLayout.setTitle(book.getTitle());
+        mCollapsingToolbarLayout.setTitle(book.getBookName());
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.Toolbar_expanded_text);//展开后的字体大小等
@@ -148,7 +150,9 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
                 SearchResActivity_.intent(DetailsActivity.this).key(text).start();
             }
         };
-        for (String tag : book.getTags()) {
+
+        //TODO: tags
+        /*for (String tag : book.getTags()) {
             TagView tagView = new TagView(this, null);
             tagView.setTagType(TagView.CLASSIC);
             tagView.setTagColor(ResUtils.getResColor(this, R.color.colorAccent));
@@ -159,8 +163,8 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
             tagView.setText(tag);
             tagView.setOnClickListener(tagListener);
             mTagsLayout.addView(tagView);
-        }
-        ImageLoader.getInstance().displayImage(book.getImgL(), mIcon, Constants.getImageOptions()
+        }*/
+        ImageLoader.getInstance().displayImage(book.getCover(), mIcon, Constants.getImageOptions()
                 , new SimpleImageLoadingListener() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
@@ -170,13 +174,13 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
                 });
         activity_details_text_author.setText(book.getAuthor());
         activity_details_text_publisher.setText(book.getPublisher());
-        activity_details_text_pubdate.setText(book.getPubdate());
-        activity_details_text_page.setText(book.getPages());
+        activity_details_text_pubdate.setText("Unknown");
+        activity_details_text_page.setText("Unknown");
         activity_details_text_price.setText(book.getPrice());
-        activity_details_text_binding.setText(book.getBinding());
-        activity_details_text_isbn.setText(book.getIsbn());
-        mBookTextInfo.setText(book.getTitle() + "\n" + book.getIntroContent());
-        mBookTextDir.setText(book.getDir());
+        activity_details_text_binding.setText("Unknown");
+        activity_details_text_isbn.setText(book.getISBNX());
+        mBookTextInfo.setText(book.getBookName() + "\n" + book.getIntro());
+        mBookTextDir.setText("Unknown");
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
@@ -231,7 +235,7 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
 
     @Click(R.id.activity_details_img)
     public void clickImage() {
-        BookImageActivity_.start(this, mIcon, book.getImgL(), book.getTitle());
+        BookImageActivity_.start(this, mIcon, book.getCover(), book.getBookName());
     }
 
     @Click(R.id.activity_details_theme)
@@ -243,10 +247,10 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
 
     @Click(R.id.activity_details_text_author)
     public void clickAuthor() {
-        if (!TextUtils.isEmpty(book.getIntroAuthor())) {
+        if (!TextUtils.isEmpty(book.getAuthorIntro())) {
             DialogUtils.show(this, R.string.title_author, SkinUtils.getTextColor(),
                     SkinUtils.getTextBackgroundColorId(this)
-                    , book.getIntroAuthor().split("\n"));
+                    , book.getAuthorIntro().split("\n"));
         }
     }
 
@@ -306,18 +310,18 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
         oks.disableSSOWhenAuthorize();
 
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle(book.getTitle());
+        oks.setTitle(book.getBookName());
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
         oks.setTitleUrl(url);
         // text是分享文本，所有平台都需要这个字段
-        oks.setText(book.getIntroContent().substring(0, 100) + "......");
+        oks.setText(book.getIntro().substring(0, 100) + "......");
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl(url);
-        oks.setImageUrl(book.getImgL());
+        oks.setImageUrl(book.getCover());
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
         oks.setComment("");
         // site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite(book.getTitle());
+        oks.setSite(book.getBookName());
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl(url);
         oks.show(this);

@@ -14,6 +14,8 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class Constants {
 
+    public static final String host_addr = "http://47.100.25.190:8088/v1/";
+
     public static final String APPID_AVOS = "l8eot9jDXBhCt40q1BPJqH9a-gzGzoHsz";
     public static final String APPKEY_AVOS = "fAYpLpd3IBwlaiixg0bM20Rm";
     public static final String APPID_SINA = "1550326405";

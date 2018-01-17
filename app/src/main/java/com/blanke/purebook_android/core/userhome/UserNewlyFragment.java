@@ -112,8 +112,8 @@ public class UserNewlyFragment extends BaseFragment
                 @Override
                 protected void convert(BaseAdapterHelper helper, UserBookLike item) {
                     ImageView img = helper.getImageView(R.id.item_newly_booklike_img);
-                    ImageLoader.getInstance().displayImage(item.getBook().getImgL(), img, Constants.getImageOptions());
-                    helper.getTextView(R.id.item_newly_booklike_title).setText(item.getBook().getTitle());
+                    ImageLoader.getInstance().displayImage(item.getBook().getCover(), img, Constants.getImageOptions());
+                    helper.getTextView(R.id.item_newly_booklike_title).setText(item.getBook().getIntro());
                     helper.getTextView(R.id.item_newly_booklike_time).setText(DateUtils.getTimestampString(item.getUpdatedAt()));
                     SkinManager.getInstance().injectSkin(img.getRootView());
                 }
@@ -124,9 +124,9 @@ public class UserNewlyFragment extends BaseFragment
                 @Override
                 protected void convert(BaseAdapterHelper helper, BookComment item) {
                     ImageView img = helper.getImageView(R.id.item_newly_booklike_img);
-                    ImageLoader.getInstance().displayImage(item.getBook().getImgL(), img, Constants.getImageOptions());
+                    ImageLoader.getInstance().displayImage(item.getBook().getCover(), img, Constants.getImageOptions());
                     helper.getTextView(R.id.item_newly_booklike_title)
-                            .setText(item.getBook().getTitle());
+                            .setText(item.getBook().getBookName());
                     helper.getTextView(R.id.item_newly_booklike_time)
                             .setText(DateUtils.getTimestampString(item.getUpdatedAt()));
                     helper.getTextView(R.id.item_newly_booklike_content)

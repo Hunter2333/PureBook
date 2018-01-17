@@ -56,10 +56,10 @@ public class SearchResActivity extends BaseMvpLceViewStateActivity<LinearLayout,
         mAdapter = new BaseRecyclerAdapter<Book>(this, R.layout.item_searchres_book) {
             @Override
             protected void convert(BaseAdapterHelper helper, Book book) {
-                helper.getTextView(R.id.item_search_title).setText(book.getTitle());
-                helper.getTextView(R.id.item_search_info).setText(book.getIntroContent());
+                helper.getTextView(R.id.item_search_title).setText(book.getBookName());
+                helper.getTextView(R.id.item_search_info).setText(book.getIntro());
                 ImageLoader.getInstance()
-                        .displayImage(book.getImgL(), helper.getImageView(R.id.item_search_image), Constants.getImageOptions());
+                        .displayImage(book.getCover(), helper.getImageView(R.id.item_search_image), Constants.getImageOptions());
             }
         };
         LinearLayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

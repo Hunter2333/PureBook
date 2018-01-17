@@ -61,10 +61,12 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
 
     @Override
     public void onBindViewHolder(BookViewHolder holder, int position) {
+
+        //TODO
         Book book = books.get(position);
-        holder.textView.setText(book.getTitle());
+        holder.textView.setText(book.getBookName());
         ImageLoader.getInstance()
-                .displayImage(book.getImgL(), holder.imageView, Constants.getImageOptions()
+                .displayImage(book.getCover(), holder.imageView, Constants.getImageOptions()
                         , new ImageLoadingListener() {
                             @Override
                             public void onLoadingStarted(String s, View view) {
