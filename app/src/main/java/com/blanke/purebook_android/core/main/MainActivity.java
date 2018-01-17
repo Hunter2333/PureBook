@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -169,6 +170,8 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         if (position != mSelectPostion) {
             searchView.closeSearch();//选择其他menu，关闭搜索框
             mSelectPostion = position;
+            Bundle bundle =new Bundle();
+            bundle.putSerializable("USER_TO_FRAGMENT",this.currentUser);
             BookColumn item = bookColumns.get(position);
             toolbar.setTitle(item.getName());//设置toolbar title
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -181,7 +184,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
             }
             trans.commit();
             mSelectFragment = fragments[position];
-
+            mSelectFragment.setArguments(bundle);
         }
     }
 

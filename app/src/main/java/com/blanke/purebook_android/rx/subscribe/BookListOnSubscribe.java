@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+
+
 //TODO:
 public class BookListOnSubscribe extends BaseCloudOnSubscribe<List<Book>> {
     private BookColumn column;
@@ -28,7 +30,7 @@ public class BookListOnSubscribe extends BaseCloudOnSubscribe<List<Book>> {
 
     @Override
     protected List<Book> execute() throws Exception {
-        String url = Constants.host_addr+"books/top250";
+        String url = Constants.REQUEST_HTTP_URL+"books/top250";
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)

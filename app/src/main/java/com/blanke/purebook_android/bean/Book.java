@@ -17,8 +17,6 @@ import java.util.List;
 @AVClassName("Book")
 public class  Book extends AVObject implements Parcelable{
 
-
-
     private String BookName;
     private int BookID;
     private String Author;

@@ -31,7 +31,7 @@ public class CloudFunctionOnSubscribe<T> extends BaseCloudOnSubscribe<T> {
     protected T execute() throws Exception {
         if(cloudFunctionName==Constants.CLOUD_FUNCTION_RANDOM_BOOK){
             int userid = 1000001;
-            String url = Constants.host_addr + "users/"+ userid +"/recommendation";
+            String url = Constants.REQUEST_HTTP_URL + "users/"+ userid +"/recommendation";
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
@@ -50,7 +50,7 @@ public class CloudFunctionOnSubscribe<T> extends BaseCloudOnSubscribe<T> {
             }
             return null;
         }else if(cloudFunctionName==Constants.CLOUD_FUNCTION_SEARCH_BOOK) {
-            String url = Constants.host_addr + "books?namelike=" + params.get("key").toString();
+            String url = Constants.REQUEST_HTTP_URL + "books?namelike=" + params.get("key").toString();
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
