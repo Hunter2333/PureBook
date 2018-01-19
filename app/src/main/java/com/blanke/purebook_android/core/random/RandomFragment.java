@@ -34,7 +34,6 @@ public class RandomFragment extends BaseColumnFragment<LinearLayout, List<Book>,
     SwipeFlingAdapterView mSwipeFlingAdapterView;
 
     private RandomAdapter mAdapter;
-    private UserBean currentUser;
     private int page_count = Constants.PAGE_COUNT;
     private int page = 0;
     private boolean isFirstNetworkFinish = false;
@@ -51,8 +50,6 @@ public class RandomFragment extends BaseColumnFragment<LinearLayout, List<Book>,
 
     @AfterViews
     void init() {
-        Bundle bundle = this.getArguments();
-        currentUser = (UserBean) bundle.getSerializable("USER_TO_FRAGMENT");
         mAdapter = new RandomAdapter(getActivity());
         mSwipeFlingAdapterView.setAdapter(mAdapter);
         mSwipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {

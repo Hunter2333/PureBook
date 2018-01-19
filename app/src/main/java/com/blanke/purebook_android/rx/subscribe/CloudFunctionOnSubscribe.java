@@ -30,7 +30,7 @@ public class CloudFunctionOnSubscribe<T> extends BaseCloudOnSubscribe<T> {
     @Override
     protected T execute() throws Exception {
         if(cloudFunctionName==Constants.CLOUD_FUNCTION_RANDOM_BOOK){
-            int userid = 1000001;
+            int userid = Constants.USER_ID;
             String url = Constants.REQUEST_HTTP_URL + "users/"+ userid +"/recommendation";
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request = new Request.Builder()

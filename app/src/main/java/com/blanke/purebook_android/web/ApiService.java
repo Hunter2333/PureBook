@@ -9,6 +9,7 @@ import com.squareup.okhttp.ResponseBody;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -39,7 +40,11 @@ public interface ApiService {
     @GET("users/{id}/collection")
     Call<BaseResponse<List<BookBean>>> getUserLikeBooks(@Path("id") int id);
 
+    @POST("users/{id}/collection")
+    Call likeBookById(@Path("id")int userId,@Query("BookID")int bookId);
 
+    @DELETE("users/{id}/collection")
+    Call deleteLikeBookById(@Path("id")int userId,@Query("BookID")int bookId);
 
 
 }

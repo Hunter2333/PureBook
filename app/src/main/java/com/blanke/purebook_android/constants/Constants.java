@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class Constants {
     public static final  String REQUEST_HTTP_URL = "http://47.100.25.190:8088/v1/";
+    public static int CURRENT_USER_ID;
     public static final int DEFAULT_TIMEOUT = 5;
     public static final String APPID_AVOS = "l8eot9jDXBhCt40q1BPJqH9a-gzGzoHsz";
     public static final String APPKEY_AVOS = "fAYpLpd3IBwlaiixg0bM20Rm";

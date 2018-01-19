@@ -170,8 +170,8 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
         if (position != mSelectPostion) {
             searchView.closeSearch();//选择其他menu，关闭搜索框
             mSelectPostion = position;
-            Bundle bundle =new Bundle();
-            bundle.putSerializable("USER_TO_FRAGMENT",this.currentUser);
+            //Bundle bundle =new Bundle();
+           // bundle.putInt("USER_TO_FRAGMENT",this.currentUser.getUserID());
             BookColumn item = bookColumns.get(position);
             toolbar.setTitle(item.getName());//设置toolbar title
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -208,6 +208,7 @@ public class MainActivity extends BaseMvpLceViewStateActivity<View, List<BookCol
      */
     private void initNavigationMenu() {
         currentUser = (UserBean) getIntent().getSerializableExtra("UserObject");
+        Constants.USER_ID = currentUser.getUserID();//设置user id
         Menu menu = navigationView.getMenu();//获取menu实例
 
         int random = (int) (Math.random() * 9 + 1);//获取0到10的随机数

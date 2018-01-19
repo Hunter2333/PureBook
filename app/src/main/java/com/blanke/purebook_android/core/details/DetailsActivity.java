@@ -92,7 +92,7 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
     @ViewById(R.id.activity_details_taglayout)
     FlowLayout mTagsLayout;
 
-    private DetailsPresenter mPersenter;
+    private DetailsPresenter mPresenter;
     @Extra
     Book book;
     private double h = 0;
@@ -195,18 +195,18 @@ public class DetailsActivity extends BaseSwipeBackActivity implements DetailsVie
         mLikeButton.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                mPersenter.setLike(true);
+                mPresenter.setLike(true);
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                mPersenter.setLike(false);
+                mPresenter.setLike(false);
             }
         });
 
 
-        mPersenter = new DetailsPresenterImpl(this, book);
-        mPersenter.initLikeState();
+        mPresenter = new DetailsPresenterImpl(this, book);
+        mPresenter.initLikeState();
         toolbar.setOnMenuItemClickListener(item -> {
             showShare();
             return false;
